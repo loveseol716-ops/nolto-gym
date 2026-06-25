@@ -11,7 +11,7 @@ const revealObserver = new IntersectionObserver(
     });
   },
   {
-    threshold: 0.16,
+    threshold: 0.15,
   }
 );
 
@@ -19,12 +19,12 @@ revealElements.forEach((element) => {
   revealObserver.observe(element);
 });
 
-const heroWord = document.querySelector(".hero-word");
+const heroBgText = document.querySelector(".hero-bg-text");
 
 window.addEventListener("scroll", () => {
-  const scrollY = window.scrollY;
+  const y = window.scrollY;
 
-  if (heroWord) {
-    heroWord.style.transform = `translateX(${scrollY * 0.08}px) rotate(-4deg)`;
+  if (heroBgText) {
+    heroBgText.style.transform = `translateX(${y * 0.08}px) rotate(-4deg)`;
   }
 });
