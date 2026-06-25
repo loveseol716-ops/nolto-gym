@@ -28,31 +28,3 @@ window.addEventListener("scroll", () => {
     heroWord.style.transform = `translateX(${scrollY * 0.08}px) rotate(-4deg)`;
   }
 });
-
-const openSchedule = document.getElementById("openSchedule");
-const closeSchedule = document.getElementById("closeSchedule");
-const scheduleModal = document.getElementById("scheduleModal");
-
-openSchedule.addEventListener("click", () => {
-  scheduleModal.classList.add("is-open");
-  document.body.style.overflow = "hidden";
-});
-
-closeSchedule.addEventListener("click", () => {
-  scheduleModal.classList.remove("is-open");
-  document.body.style.overflow = "";
-});
-
-scheduleModal.addEventListener("click", (event) => {
-  if (event.target === scheduleModal) {
-    scheduleModal.classList.remove("is-open");
-    document.body.style.overflow = "";
-  }
-});
-
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") {
-    scheduleModal.classList.remove("is-open");
-    document.body.style.overflow = "";
-  }
-});
