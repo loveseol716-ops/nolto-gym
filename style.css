@@ -1121,3 +1121,104 @@ footer strong {
     font-size: clamp(38px, 12vw, 56px);
   }
 }
+/* === Carousel refined control / Apple-like size === */
+
+.feature-scroll {
+  scroll-snap-type: x mandatory;
+}
+
+.feature-card {
+  scroll-snap-align: center;
+}
+
+.carousel-control {
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.slide-pill {
+  gap: 20px;
+  padding: 18px 26px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.075);
+}
+
+.slide-dot {
+  width: 11px;
+  height: 11px;
+  background: rgba(244, 239, 227, 0.7);
+}
+
+.slide-dot.active {
+  width: 58px;
+  background: rgba(244, 239, 227, 0.28);
+}
+
+.carousel-toggle {
+  width: 68px;
+  height: 68px;
+  gap: 7px;
+  background: rgba(255, 255, 255, 0.075);
+}
+
+.carousel-toggle span {
+  width: 10px;
+  height: 30px;
+  border-radius: 4px;
+}
+
+.carousel-toggle.playing span:first-child {
+  border-top-width: 14px;
+  border-bottom-width: 14px;
+  border-left-width: 22px;
+}
+
+@media (max-width: 720px) {
+  .feature-scroll {
+    margin-left: -22px;
+    margin-right: -22px;
+    padding-left: 11vw;
+    padding-right: 11vw;
+  }
+
+  .feature-card {
+    flex: 0 0 78vw;
+    scroll-snap-align: center;
+  }
+
+  .carousel-control {
+    gap: 10px;
+  }
+
+  .slide-pill {
+    gap: 14px;
+    padding: 14px 20px;
+  }
+
+  .slide-dot {
+    width: 9px;
+    height: 9px;
+  }
+
+  .slide-dot.active {
+    width: 46px;
+  }
+
+  .carousel-toggle {
+    width: 54px;
+    height: 54px;
+    gap: 6px;
+  }
+
+  .carousel-toggle span {
+    width: 8px;
+    height: 24px;
+  }
+
+  .carousel-toggle.playing span:first-child {
+    border-top-width: 11px;
+    border-bottom-width: 11px;
+    border-left-width: 18px;
+  }
+}
