@@ -29,8 +29,10 @@ window.addEventListener("scroll", () => {
   }
 });
 
+/* === Infinite Carousel === */
+
 const featureScroll = document.getElementById("featureScroll");
-const featureCards = document.querySelectorAll(".feature-card");
+const originalCards = Array.from(document.querySelectorAll(".feature-card"));
 const slideDots = document.querySelectorAll(".slide-dot");
 const carouselToggle = document.getElementById("carouselToggle");
 const carouselControl = document.getElementById("carouselControl");
@@ -40,70 +42,123 @@ let carouselTimer = null;
 let isPaused = false;
 const slideDuration = 5000;
 
-function resetDotAnimation() {
-  slideDots.forEach((dot) => {
-    const bar = dot.querySelector("span");
-    if (bar) {
-      bar.style.animation = "none";
-      void bar.offsetWidth;
-      bar.style.animation = "";
-    }
-  });
-}
+if (featureScroll && originalCards.length > 0) {
+  const firstClone = originalCards[0].cloneNode(true);
+  const lastClone = originalCards[originalCards.length - 1].cloneNode(true);
 
-function updateDots() {
-  slideDots.forEach((dot, index) => {
-    dot.classList.toggle("active", index === currentFeature);
-  });
+  firstClone.classList.add("clone");
+  lastClone.classList.add("clone");
 
-  resetDotAnimation();
-}
+  featureScroll.insertBefore(lastClone, originalCards[0]);
+  featureScroll.appendChild(firstClone);
 
-function goToFeature(index) {
-  if (!featureScroll || featureCards.length === 0) return;
+  const allCards = Array.from(featureScroll.querySelectorAll(".feature-card"));
+  let visualIndex = 1;
 
-  currentFeature = (index + featureCards.length) % featureCards.length;
+  function resetDotAnimation() {
+    slideDots.forEach((dot) => {
+      const bar = dot.querySelector("span");
 
-  featureCards[currentFeature].scrollIntoView({
-    behavior: "smooth",
-    inline: "start",
-    block: "nearest",
-  });
+      if (bar) {
+        bar.style.animation = "none";
+        void bar.offsetWidth;
+        bar.style.animation = "";
+      }
+    });
+  }
 
-  updateDots();
-}
+  function updateDots() {
+    slideDots.forEach((dot, index) => {
+      dot.classList.toggle("active", index === currentFeature);
+    });
 
-function startCarousel() {
-  clearTimeout(carouselTimer);
+    resetDotAnimation();
+  }
 
-  if (isPaused) return;
+  function scrollToVisual(index, smooth = true) {
+    visualIndex = index;
 
-  carouselTimer = setTimeout(() => {
-    goToFeature(currentFeature + 1);
+    allCards[visualIndex].scrollIntoView({
+      behavior: smooth ? "smooth" : "auto",
+      inline: "center",
+      block: "nearest",
+    });
+  }
+
+  function goToFeature(index) {
+    currentFeature = (index + originalCards.length) % originalCards.length;
+    scrollToVisual(currentFeature + 1, true);
+    updateDots();
+  }
+
+  function startCarousel() {
+    clearTimeout(carouselTimer);
+
+    if (isPaused) return;
+
+    carouselTimer = setTimeout(() => {
+      goToFeature(currentFeature + 1);
+      startCarousel();
+    }, slideDuration);
+  }
+
+  function pauseCarousel() {
+    isPaused = true;
+    clearTimeout(carouselTimer);
+    carouselControl.classList.add("paused");
+    carouselToggle.classList.add("playing");
+    carouselToggle.setAttribute("aria-label", "슬라이드 재생");
+  }
+
+  function resumeCarousel() {
+    isPaused = false;
+    carouselControl.classList.remove("paused");
+    carouselToggle.classList.remove("playing");
+    carouselToggle.setAttribute("aria-label", "슬라이드 일시정지");
+    updateDots();
     startCarousel();
-  }, slideDuration);
-}
+  }
 
-function pauseCarousel() {
-  isPaused = true;
-  clearTimeout(carouselTimer);
-  carouselControl.classList.add("paused");
-  carouselToggle.classList.add("playing");
-  carouselToggle.setAttribute("aria-label", "슬라이드 재생");
-}
+  function detectCurrentCard() {
+    const scrollCenter = featureScroll.scrollLeft + featureScroll.offsetWidth / 2;
 
-function resumeCarousel() {
-  isPaused = false;
-  carouselControl.classList.remove("paused");
-  carouselToggle.classList.remove("playing");
-  carouselToggle.setAttribute("aria-label", "슬라이드 일시정지");
-  updateDots();
-  startCarousel();
-}
+    let closestIndex = 0;
+    let closestDistance = Infinity;
 
-if (featureScroll && featureCards.length > 0) {
-  updateDots();
-  startCarousel();
+    allCards.forEach((card, index) => {
+      const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+      const distance = Math.abs(scrollCenter - cardCenter);
+
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closestIndex = index;
+      }
+    });
+
+    visualIndex = closestIndex;
+
+    if (visualIndex === 0) {
+      currentFeature = originalCards.length - 1;
+      setTimeout(() => {
+        scrollToVisual(originalCards.length, false);
+      }, 80);
+    } else if (visualIndex === allCards.length - 1) {
+      currentFeature = 0;
+      setTimeout(() => {
+        scrollToVisual(1, false);
+      }, 80);
+    } else {
+      currentFeature = visualIndex - 1;
+    }
+
+    updateDots();
+  }
+
+  setTimeout(() => {
+    scrollToVisual(1, false);
+    updateDots();
+    startCarousel();
+  }, 100);
 
   slideDots.forEach((dot) => {
     dot.addEventListener("click", () => {
@@ -124,10 +179,22 @@ if (featureScroll && featureCards.length > 0) {
     }
   });
 
+  let scrollEndTimer = null;
+
   featureScroll.addEventListener("pointerdown", () => {
     pauseCarousel();
   });
+
+  featureScroll.addEventListener("scroll", () => {
+    clearTimeout(scrollEndTimer);
+
+    scrollEndTimer = setTimeout(() => {
+      detectCurrentCard();
+    }, 120);
+  });
 }
+
+/* === Program Accordion === */
 
 const programData = {
   gentle: {
@@ -167,6 +234,8 @@ programItems.forEach((item) => {
     artTitle.textContent = data.title;
   });
 });
+
+/* === Video Modal === */
 
 const openVideo = document.getElementById("openVideo");
 const closeVideo = document.getElementById("closeVideo");
