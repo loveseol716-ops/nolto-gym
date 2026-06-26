@@ -29,6 +29,62 @@ window.addEventListener("scroll", () => {
   }
 });
 
+const featureScroll = document.getElementById("featureScroll");
+const featureCards = document.querySelectorAll(".feature-card");
+const progressBar = document.getElementById("progressBar");
+const carouselCount = document.getElementById("carouselCount");
+
+let currentFeature = 0;
+let carouselTimer;
+
+function startProgress() {
+  progressBar.classList.remove("running");
+  void progressBar.offsetWidth;
+  progressBar.classList.add("running");
+}
+
+function goToFeature(index) {
+  if (!featureScroll || featureCards.length === 0) return;
+
+  currentFeature = index % featureCards.length;
+
+  featureCards[currentFeature].scrollIntoView({
+    behavior: "smooth",
+    inline: "start",
+    block: "nearest",
+  });
+
+  carouselCount.textContent = `${String(currentFeature + 1).padStart(2, "0")} / ${String(featureCards.length).padStart(2, "0")}`;
+
+  startProgress();
+}
+
+function startCarousel() {
+  if (!featureScroll || featureCards.length === 0) return;
+
+  startProgress();
+
+  carouselTimer = setInterval(() => {
+    goToFeature(currentFeature + 1);
+  }, 5000);
+}
+
+if (featureScroll && featureCards.length > 0) {
+  startCarousel();
+
+  featureScroll.addEventListener("pointerdown", () => {
+    clearInterval(carouselTimer);
+    progressBar.classList.remove("running");
+  });
+
+  featureScroll.addEventListener("pointerup", () => {
+    const cardWidth = featureCards[0].offsetWidth + 18;
+    currentFeature = Math.round(featureScroll.scrollLeft / cardWidth);
+    goToFeature(currentFeature);
+    startCarousel();
+  });
+}
+
 const programData = {
   gentle: {
     label: "GENTLE",
