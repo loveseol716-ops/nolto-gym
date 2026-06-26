@@ -31,22 +31,38 @@ window.addEventListener("scroll", () => {
 
 const featureScroll = document.getElementById("featureScroll");
 const featureCards = document.querySelectorAll(".feature-card");
-const progressBar = document.getElementById("progressBar");
-const carouselCount = document.getElementById("carouselCount");
+const slideDots = document.querySelectorAll(".slide-dot");
+const carouselToggle = document.getElementById("carouselToggle");
+const carouselControl = document.getElementById("carouselControl");
 
 let currentFeature = 0;
-let carouselTimer;
+let carouselTimer = null;
+let isPaused = false;
+const slideDuration = 5000;
 
-function startProgress() {
-  progressBar.classList.remove("running");
-  void progressBar.offsetWidth;
-  progressBar.classList.add("running");
+function resetDotAnimation() {
+  slideDots.forEach((dot) => {
+    const bar = dot.querySelector("span");
+    if (bar) {
+      bar.style.animation = "none";
+      void bar.offsetWidth;
+      bar.style.animation = "";
+    }
+  });
+}
+
+function updateDots() {
+  slideDots.forEach((dot, index) => {
+    dot.classList.toggle("active", index === currentFeature);
+  });
+
+  resetDotAnimation();
 }
 
 function goToFeature(index) {
   if (!featureScroll || featureCards.length === 0) return;
 
-  currentFeature = index % featureCards.length;
+  currentFeature = (index + featureCards.length) % featureCards.length;
 
   featureCards[currentFeature].scrollIntoView({
     behavior: "smooth",
@@ -54,34 +70,62 @@ function goToFeature(index) {
     block: "nearest",
   });
 
-  carouselCount.textContent = `${String(currentFeature + 1).padStart(2, "0")} / ${String(featureCards.length).padStart(2, "0")}`;
-
-  startProgress();
+  updateDots();
 }
 
 function startCarousel() {
-  if (!featureScroll || featureCards.length === 0) return;
+  clearTimeout(carouselTimer);
 
-  startProgress();
+  if (isPaused) return;
 
-  carouselTimer = setInterval(() => {
+  carouselTimer = setTimeout(() => {
     goToFeature(currentFeature + 1);
-  }, 5000);
+    startCarousel();
+  }, slideDuration);
+}
+
+function pauseCarousel() {
+  isPaused = true;
+  clearTimeout(carouselTimer);
+  carouselControl.classList.add("paused");
+  carouselToggle.classList.add("playing");
+  carouselToggle.setAttribute("aria-label", "슬라이드 재생");
+}
+
+function resumeCarousel() {
+  isPaused = false;
+  carouselControl.classList.remove("paused");
+  carouselToggle.classList.remove("playing");
+  carouselToggle.setAttribute("aria-label", "슬라이드 일시정지");
+  updateDots();
+  startCarousel();
 }
 
 if (featureScroll && featureCards.length > 0) {
+  updateDots();
   startCarousel();
 
-  featureScroll.addEventListener("pointerdown", () => {
-    clearInterval(carouselTimer);
-    progressBar.classList.remove("running");
+  slideDots.forEach((dot) => {
+    dot.addEventListener("click", () => {
+      const index = Number(dot.dataset.index);
+      goToFeature(index);
+
+      if (!isPaused) {
+        startCarousel();
+      }
+    });
   });
 
-  featureScroll.addEventListener("pointerup", () => {
-    const cardWidth = featureCards[0].offsetWidth + 18;
-    currentFeature = Math.round(featureScroll.scrollLeft / cardWidth);
-    goToFeature(currentFeature);
-    startCarousel();
+  carouselToggle.addEventListener("click", () => {
+    if (isPaused) {
+      resumeCarousel();
+    } else {
+      pauseCarousel();
+    }
+  });
+
+  featureScroll.addEventListener("pointerdown", () => {
+    pauseCarousel();
   });
 }
 
