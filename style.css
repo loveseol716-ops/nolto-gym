@@ -1222,3 +1222,258 @@ footer strong {
     border-left-width: 18px;
   }
 }
+/* === New Weekly Schedule Design === */
+
+.schedule-section {
+  background:
+    radial-gradient(circle at top right, rgba(244, 239, 227, 0.13), transparent 34%),
+    linear-gradient(180deg, var(--green), var(--dark));
+}
+
+.time-zone-grid {
+  display: grid;
+  gap: 14px;
+  margin-top: 36px;
+}
+
+.time-zone-card {
+  min-height: 210px;
+  padding: 24px;
+  border-radius: 30px;
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(circle at 85% 20%, rgba(244, 239, 227, 0.18), transparent 34%),
+    rgba(244, 239, 227, 0.065);
+}
+
+.time-zone-card span {
+  display: block;
+  margin-bottom: 44px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 950;
+  letter-spacing: 0.16em;
+}
+
+.time-zone-card strong {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 25px;
+  line-height: 1.05;
+  letter-spacing: -0.055em;
+}
+
+.time-zone-card p {
+  margin-bottom: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.weekend-time {
+  background:
+    radial-gradient(circle at 85% 20%, rgba(244, 239, 227, 0.28), transparent 34%),
+    rgba(244, 239, 227, 0.12);
+}
+
+.weekly-flow {
+  margin-top: 36px;
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 18px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.weekly-flow::-webkit-scrollbar {
+  display: none;
+}
+
+.day-card {
+  flex: 0 0 min(82vw, 360px);
+  min-height: 560px;
+  padding: 22px;
+  border-radius: 34px;
+  border: 1px solid var(--line);
+  background: linear-gradient(145deg, rgba(244, 239, 227, 0.12), rgba(244, 239, 227, 0.035));
+  scroll-snap-align: start;
+}
+
+.day-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 30px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.day-head span {
+  font-size: 42px;
+  line-height: 0.9;
+  font-weight: 950;
+  letter-spacing: -0.08em;
+}
+
+.day-head strong {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.session-list {
+  display: grid;
+  gap: 10px;
+}
+
+.session {
+  display: grid;
+  grid-template-columns: 78px 1fr;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 12px;
+  border-radius: 18px;
+  background: rgba(0, 0, 0, 0.13);
+}
+
+.session p {
+  margin-bottom: 0;
+  font-size: 15px;
+  font-weight: 850;
+  letter-spacing: -0.03em;
+}
+
+.session-tag {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 24px;
+  padding: 5px 7px;
+  border-radius: 999px;
+  font-size: 9px;
+  font-weight: 950;
+  letter-spacing: 0.08em;
+}
+
+.gentle-tag {
+  background: rgba(244, 239, 227, 0.18);
+  color: var(--ivory);
+}
+
+.bomb-tag {
+  background: var(--ivory);
+  color: var(--dark);
+}
+
+.open-tag {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(244, 239, 227, 0.88);
+  border: 1px solid var(--line);
+}
+
+.track-tag {
+  background: rgba(244, 239, 227, 0.1);
+  color: var(--ivory);
+  border: 1px dashed rgba(244, 239, 227, 0.45);
+}
+
+.special-tag {
+  background: rgba(244, 239, 227, 0.26);
+  color: var(--ivory);
+}
+
+.weekend-tag {
+  background: var(--ivory);
+  color: var(--dark);
+}
+
+.weekend-card {
+  background:
+    radial-gradient(circle at 75% 20%, rgba(244, 239, 227, 0.28), transparent 34%),
+    linear-gradient(145deg, rgba(244, 239, 227, 0.16), rgba(244, 239, 227, 0.04));
+}
+
+.weekend-session {
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.weekend-session h3 {
+  margin: 38px 0 6px;
+  font-size: 72px;
+  line-height: 0.9;
+  letter-spacing: -0.08em;
+}
+
+.weekend-session strong {
+  display: block;
+  margin-bottom: 14px;
+  font-size: 30px;
+  line-height: 1;
+  letter-spacing: -0.06em;
+}
+
+.weekend-session p {
+  margin-bottom: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+@media (min-width: 720px) {
+  .time-zone-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .day-card {
+    flex-basis: 370px;
+  }
+}
+
+@media (min-width: 1080px) {
+  .time-zone-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .weekly-flow {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(230px, 1fr));
+    overflow: visible;
+  }
+
+  .day-card {
+    flex: initial;
+    min-height: 600px;
+  }
+
+  .session {
+    grid-template-columns: 70px 1fr;
+  }
+
+  .session p {
+    font-size: 13px;
+  }
+
+  .day-head span {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 720px) {
+  .time-zone-card {
+    min-height: 190px;
+  }
+
+  .weekly-flow {
+    margin-left: -22px;
+    margin-right: -22px;
+    padding-left: 22px;
+    padding-right: 16vw;
+  }
+
+  .day-card {
+    flex: 0 0 82vw;
+  }
+}
