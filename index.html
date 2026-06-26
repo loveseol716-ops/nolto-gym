@@ -203,256 +203,40 @@
 
     <section class="section schedule-section" id="schedule">
       <div class="section-title reveal">
-        <p class="label">WEEKLY SCHEDULE</p>
+        <p class="label">WEEKLY FLOW</p>
         <h2>
-          당신의 하루에 맞는<br />
-          운동 시간.
+          요일만 고르면,<br />
+          오늘의 수업이 보입니다.
         </h2>
-        <p class="desc">
-          평일에는 아침, 점심, 저녁 시간대별 수업이 운영되고<br />
-          주말에는 10시에 90분 시그니처 프로그램이 진행됩니다.
-        </p>
       </div>
 
-      <div class="time-zone-grid reveal">
-        <div class="time-zone-card">
-          <span>MORNING</span>
-          <strong>07:20 / 08:20</strong>
-          <p>출근 전, 하루를 먼저 움직이고 싶은 분.</p>
+      <div class="schedule-nav reveal">
+        <button class="schedule-arrow" id="schedulePrev" type="button" aria-label="이전 요일">‹</button>
+
+        <div class="day-tabs" id="dayTabs">
+          <button class="day-tab active" type="button" data-day="0">MON</button>
+          <button class="day-tab" type="button" data-day="1">TUE</button>
+          <button class="day-tab" type="button" data-day="2">WED</button>
+          <button class="day-tab" type="button" data-day="3">THU</button>
+          <button class="day-tab" type="button" data-day="4">FRI</button>
+          <button class="day-tab" type="button" data-day="5">SAT</button>
+          <button class="day-tab" type="button" data-day="6">SUN</button>
         </div>
 
-        <div class="time-zone-card">
-          <span>LUNCH</span>
-          <strong>12:10</strong>
-          <p>점심시간에 짧고 밀도 있게 운동하고 싶은 분.</p>
-        </div>
-
-        <div class="time-zone-card">
-          <span>EVENING</span>
-          <strong>18:20 / 19:30 / 20:40</strong>
-          <p>퇴근 후 제대로 땀 흘리고 싶은 분.</p>
-        </div>
-
-        <div class="time-zone-card weekend-time">
-          <span>WEEKEND</span>
-          <strong>SAT · SUN 10:00</strong>
-          <p>90분 동안 팀 분위기와 고강도 트레이닝에 몰입하고 싶은 분.</p>
-        </div>
+        <button class="schedule-arrow" id="scheduleNext" type="button" aria-label="다음 요일">›</button>
       </div>
 
-      <div class="weekly-flow reveal">
-        <article class="day-card">
-          <div class="day-head">
-            <span>MON</span>
-            <strong>월요일</strong>
+      <article class="schedule-day-card reveal" id="scheduleCard">
+        <div class="schedule-day-top">
+          <div>
+            <span id="scheduleShort">MON</span>
+            <strong id="scheduleKr">월요일</strong>
           </div>
+          <p id="scheduleTitle">Gentle로 시작하고 Bomb로 마무리하는 하루.</p>
+        </div>
 
-          <div class="session-list">
-            <div class="session">
-              <span class="session-tag gentle-tag">GENTLE</span>
-              <p>07:20 Strength</p>
-            </div>
-            <div class="session">
-              <span class="session-tag open-tag">OPEN</span>
-              <p>08:20 Open Gym</p>
-            </div>
-            <div class="session">
-              <span class="session-tag bomb-tag">BOMB</span>
-              <p>10:00 Sweat</p>
-            </div>
-            <div class="session">
-              <span class="session-tag gentle-tag">GENTLE</span>
-              <p>12:10 Strength</p>
-            </div>
-            <div class="session">
-              <span class="session-tag gentle-tag">GENTLE</span>
-              <p>18:20 Strength</p>
-            </div>
-            <div class="session">
-              <span class="session-tag bomb-tag">BOMB</span>
-              <p>19:30 Sweat</p>
-            </div>
-            <div class="session">
-              <span class="session-tag gentle-tag">GENTLE</span>
-              <p>20:40 Strength</p>
-            </div>
-          </div>
-        </article>
-
-        <article class="day-card">
-          <div class="day-head">
-            <span>TUE</span>
-            <strong>화요일</strong>
-          </div>
-
-          <div class="session-list">
-            <div class="session">
-              <span class="session-tag gentle-tag">GENTLE</span>
-              <p>07:20 Sweat</p>
-            </div>
-            <div class="session">
-              <span class="session-tag track-tag">TRACK</span>
-              <p>08:20 Track Run</p>
-            </div>
-            <div class="session">
-              <span class="session-tag gentle-tag">GENTLE</span>
-              <p>12:10 Sweat</p>
-            </div>
-            <div class="session">
-              <span class="session-tag gentle-tag">GENTLE</span>
-              <p>18:20 Sweat</p>
-            </div>
-            <div class="session">
-              <span class="session-tag bomb-tag">BOMB</span>
-              <p>19:30 Strength</p>
-            </div>
-            <div class="session">
-              <span class="session-tag gentle-tag">GENTLE</span>
-              <p>20:40 Sweat</p>
-            </div>
-          </div>
-        </article>
-
-        <article class="day-card">
-          <div class="day-head">
-            <span>WED</span>
-            <strong>수요일</strong>
-          </div>
-
-          <div class="session-list">
-            <div class="session">
-              <span class="session-tag bomb-tag">BOMB</span>
-              <p>07:20 Strength</p>
-            </div>
-            <div class="session">
-              <span class="session-tag open-tag">OPEN</span>
-              <p>08:20 Open Gym</p>
-            </div>
-            <div class="session">
-              <span class="session-tag gentle-tag">GENTLE</span>
-              <p>10:00 Sweat</p>
-            </div>
-            <div class="session">
-              <span class="session-tag bomb-tag">BOMB</span>
-              <p>12:10 Strength</p>
-            </div>
-            <div class="session">
-              <span class="session-tag bomb-tag">BOMB</span>
-              <p>18:20 Strength</p>
-            </div>
-            <div class="session">
-              <span class="session-tag gentle-tag">GENTLE</span>
-              <p>19:30 Sweat</p>
-            </div>
-            <div class="session">
-              <span class="session-tag bomb-tag">BOMB</span>
-              <p>20:40 Strength</p>
-            </div>
-          </div>
-        </article>
-
-        <article class="day-card">
-          <div class="day-head">
-            <span>THU</span>
-            <strong>목요일</strong>
-          </div>
-
-          <div class="session-list">
-            <div class="session">
-              <span class="session-tag open-tag">OPEN</span>
-              <p>07:20 Open Gym</p>
-            </div>
-            <div class="session">
-              <span class="session-tag track-tag">TRACK</span>
-              <p>08:20 Track Run</p>
-            </div>
-            <div class="session">
-              <span class="session-tag open-tag">OPEN</span>
-              <p>12:10 Open Gym</p>
-            </div>
-            <div class="session">
-              <span class="session-tag open-tag">OPEN</span>
-              <p>18:20 Open Gym</p>
-            </div>
-            <div class="session">
-              <span class="session-tag special-tag">SPECIAL</span>
-              <p>19:30 You in?</p>
-            </div>
-          </div>
-        </article>
-
-        <article class="day-card">
-          <div class="day-head">
-            <span>FRI</span>
-            <strong>금요일</strong>
-          </div>
-
-          <div class="session-list">
-            <div class="session">
-              <span class="session-tag bomb-tag">BOMB</span>
-              <p>07:20 Sweat</p>
-            </div>
-            <div class="session">
-              <span class="session-tag open-tag">OPEN</span>
-              <p>08:20 Open Gym</p>
-            </div>
-            <div class="session">
-              <span class="session-tag gentle-tag">GENTLE</span>
-              <p>10:00 Strength</p>
-            </div>
-            <div class="session">
-              <span class="session-tag bomb-tag">BOMB</span>
-              <p>12:10 Sweat</p>
-            </div>
-            <div class="session">
-              <span class="session-tag bomb-tag">BOMB</span>
-              <p>18:20 Sweat</p>
-            </div>
-            <div class="session">
-              <span class="session-tag gentle-tag">GENTLE</span>
-              <p>19:30 Strength</p>
-            </div>
-            <div class="session">
-              <span class="session-tag bomb-tag">BOMB</span>
-              <p>20:40 Sweat</p>
-            </div>
-          </div>
-        </article>
-
-        <article class="day-card weekend-card">
-          <div class="day-head">
-            <span>SAT</span>
-            <strong>토요일</strong>
-          </div>
-
-          <div class="weekend-session">
-            <span class="session-tag weekend-tag">WEEKEND</span>
-            <h3>10:00</h3>
-            <strong>Nolto & Team</strong>
-            <p>90분 동안 팀으로 함께 움직이는 놀토짐 주말 시그니처 수업.</p>
-          </div>
-        </article>
-
-        <article class="day-card weekend-card">
-          <div class="day-head">
-            <span>SUN</span>
-            <strong>일요일</strong>
-          </div>
-
-          <div class="weekend-session">
-            <span class="session-tag weekend-tag">WEEKEND</span>
-            <h3>10:00</h3>
-            <strong>No More Weak</strong>
-            <p>한 주를 강하게 마무리하는 90분 고강도 트레이닝.</p>
-          </div>
-        </article>
-      </div>
-
-      <p class="notice reveal">
-        Track Run은 코치 훈련 일정으로 변동될 수 있습니다.<br />
-        Open Gym은 자유롭게 이용 가능합니다.<br />
-        스케줄은 운영 상황에 따라 변경될 수 있습니다.
-      </p>
+        <div class="schedule-body" id="scheduleBody"></div>
+      </article>
     </section>
 
     <section class="section location">
