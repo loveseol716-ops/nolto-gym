@@ -29,7 +29,7 @@ window.addEventListener("scroll", () => {
   }
 });
 
-/* === Infinite Carousel === */
+/* Infinite Overview Carousel */
 
 const featureScroll = document.getElementById("featureScroll");
 const originalCards = Array.from(document.querySelectorAll(".feature-card"));
@@ -38,22 +38,37 @@ const carouselToggle = document.getElementById("carouselToggle");
 const carouselControl = document.getElementById("carouselControl");
 
 let currentFeature = 0;
+let currentPosition = 0;
 let carouselTimer = null;
 let isPaused = false;
 const slideDuration = 5000;
 
 if (featureScroll && originalCards.length > 0) {
-  const firstClone = originalCards[0].cloneNode(true);
-  const lastClone = originalCards[originalCards.length - 1].cloneNode(true);
+  const originalCount = originalCards.length;
+  const beforeClones = originalCards.map((card) => card.cloneNode(true));
+  const afterClones = originalCards.map((card) => card.cloneNode(true));
 
-  firstClone.classList.add("clone");
-  lastClone.classList.add("clone");
+  featureScroll.innerHTML = "";
 
-  featureScroll.insertBefore(lastClone, originalCards[0]);
-  featureScroll.appendChild(firstClone);
+  beforeClones.forEach((card, index) => {
+    card.classList.add("clone");
+    card.dataset.realIndex = index;
+    featureScroll.appendChild(card);
+  });
+
+  originalCards.forEach((card, index) => {
+    card.dataset.realIndex = index;
+    featureScroll.appendChild(card);
+  });
+
+  afterClones.forEach((card, index) => {
+    card.classList.add("clone");
+    card.dataset.realIndex = index;
+    featureScroll.appendChild(card);
+  });
 
   const allCards = Array.from(featureScroll.querySelectorAll(".feature-card"));
-  let visualIndex = 1;
+  currentPosition = originalCount;
 
   function resetDotAnimation() {
     slideDots.forEach((dot) => {
@@ -75,20 +90,46 @@ if (featureScroll && originalCards.length > 0) {
     resetDotAnimation();
   }
 
-  function scrollToVisual(index, smooth = true) {
-    visualIndex = index;
+  function scrollToPosition(position, smooth = true) {
+    currentPosition = position;
 
-    allCards[visualIndex].scrollIntoView({
+    allCards[currentPosition].scrollIntoView({
       behavior: smooth ? "smooth" : "auto",
       inline: "center",
       block: "nearest",
     });
   }
 
+  function normalizePosition() {
+    if (currentPosition < originalCount) {
+      currentPosition += originalCount;
+      scrollToPosition(currentPosition, false);
+    }
+
+    if (currentPosition >= originalCount * 2) {
+      currentPosition -= originalCount;
+      scrollToPosition(currentPosition, false);
+    }
+  }
+
   function goToFeature(index) {
-    currentFeature = (index + originalCards.length) % originalCards.length;
-    scrollToVisual(currentFeature + 1, true);
+    currentFeature = (index + originalCount) % originalCount;
+    scrollToPosition(originalCount + currentFeature, true);
     updateDots();
+  }
+
+  function goNextFeature() {
+    currentPosition += 1;
+
+    const realIndex = Number(allCards[currentPosition].dataset.realIndex);
+    currentFeature = realIndex;
+
+    scrollToPosition(currentPosition, true);
+    updateDots();
+
+    setTimeout(() => {
+      normalizePosition();
+    }, 520);
   }
 
   function startCarousel() {
@@ -97,7 +138,7 @@ if (featureScroll && originalCards.length > 0) {
     if (isPaused) return;
 
     carouselTimer = setTimeout(() => {
-      goToFeature(currentFeature + 1);
+      goNextFeature();
       startCarousel();
     }, slideDuration);
   }
@@ -119,15 +160,15 @@ if (featureScroll && originalCards.length > 0) {
     startCarousel();
   }
 
-  function detectCurrentCard() {
-    const scrollCenter = featureScroll.scrollLeft + featureScroll.offsetWidth / 2;
+  function detectClosestCard() {
+    const center = featureScroll.scrollLeft + featureScroll.offsetWidth / 2;
 
     let closestIndex = 0;
     let closestDistance = Infinity;
 
     allCards.forEach((card, index) => {
       const cardCenter = card.offsetLeft + card.offsetWidth / 2;
-      const distance = Math.abs(scrollCenter - cardCenter);
+      const distance = Math.abs(center - cardCenter);
 
       if (distance < closestDistance) {
         closestDistance = distance;
@@ -135,27 +176,18 @@ if (featureScroll && originalCards.length > 0) {
       }
     });
 
-    visualIndex = closestIndex;
-
-    if (visualIndex === 0) {
-      currentFeature = originalCards.length - 1;
-      setTimeout(() => {
-        scrollToVisual(originalCards.length, false);
-      }, 80);
-    } else if (visualIndex === allCards.length - 1) {
-      currentFeature = 0;
-      setTimeout(() => {
-        scrollToVisual(1, false);
-      }, 80);
-    } else {
-      currentFeature = visualIndex - 1;
-    }
+    currentPosition = closestIndex;
+    currentFeature = Number(allCards[currentPosition].dataset.realIndex);
 
     updateDots();
+
+    setTimeout(() => {
+      normalizePosition();
+    }, 80);
   }
 
   setTimeout(() => {
-    scrollToVisual(1, false);
+    scrollToPosition(originalCount, false);
     updateDots();
     startCarousel();
   }, 100);
@@ -189,12 +221,12 @@ if (featureScroll && originalCards.length > 0) {
     clearTimeout(scrollEndTimer);
 
     scrollEndTimer = setTimeout(() => {
-      detectCurrentCard();
-    }, 120);
+      detectClosestCard();
+    }, 130);
   });
 }
 
-/* === Program Accordion === */
+/* Program Accordion */
 
 const programData = {
   gentle: {
@@ -235,7 +267,178 @@ programItems.forEach((item) => {
   });
 });
 
-/* === Video Modal === */
+/* Schedule Selector */
+
+const scheduleData = [
+  {
+    short: "MON",
+    kr: "월요일",
+    title: "Gentle로 시작하고 Bomb로 마무리하는 하루.",
+    sessions: [
+      { tag: "GENTLE", type: "gentle", time: "07:20", name: "Strength" },
+      { tag: "BOMB", type: "bomb", time: "10:00", name: "Sweat" },
+      { tag: "GENTLE", type: "gentle", time: "12:10", name: "Strength" },
+      { tag: "GENTLE", type: "gentle", time: "18:20", name: "Strength" },
+      { tag: "BOMB", type: "bomb", time: "19:30", name: "Sweat" },
+      { tag: "GENTLE", type: "gentle", time: "20:40", name: "Strength" },
+    ],
+  },
+  {
+    short: "TUE",
+    kr: "화요일",
+    title: "가볍게 땀을 쌓고, 저녁에는 강하게 밀어붙이는 하루.",
+    sessions: [
+      { tag: "GENTLE", type: "gentle", time: "07:20", name: "Sweat" },
+      { tag: "GENTLE", type: "gentle", time: "12:10", name: "Sweat" },
+      { tag: "GENTLE", type: "gentle", time: "18:20", name: "Sweat" },
+      { tag: "BOMB", type: "bomb", time: "19:30", name: "Strength" },
+      { tag: "GENTLE", type: "gentle", time: "20:40", name: "Sweat" },
+    ],
+  },
+  {
+    short: "WED",
+    kr: "수요일",
+    title: "근력과 컨디셔닝을 번갈아 쌓는 중간 지점.",
+    sessions: [
+      { tag: "BOMB", type: "bomb", time: "07:20", name: "Strength" },
+      { tag: "GENTLE", type: "gentle", time: "10:00", name: "Sweat" },
+      { tag: "BOMB", type: "bomb", time: "12:10", name: "Strength" },
+      { tag: "BOMB", type: "bomb", time: "18:20", name: "Strength" },
+      { tag: "GENTLE", type: "gentle", time: "19:30", name: "Sweat" },
+      { tag: "BOMB", type: "bomb", time: "20:40", name: "Strength" },
+    ],
+  },
+  {
+    short: "THU",
+    kr: "목요일",
+    title: "정해진 틀 밖에서 움직이는 스페셜 데이.",
+    sessions: [
+      { tag: "SPECIAL", type: "special", time: "19:30", name: "You in?" },
+    ],
+  },
+  {
+    short: "FRI",
+    kr: "금요일",
+    title: "한 주의 마지막을 가장 뜨겁게 마무리하는 하루.",
+    sessions: [
+      { tag: "BOMB", type: "bomb", time: "07:20", name: "Sweat" },
+      { tag: "GENTLE", type: "gentle", time: "10:00", name: "Strength" },
+      { tag: "BOMB", type: "bomb", time: "12:10", name: "Sweat" },
+      { tag: "BOMB", type: "bomb", time: "18:20", name: "Sweat" },
+      { tag: "GENTLE", type: "gentle", time: "19:30", name: "Strength" },
+      { tag: "BOMB", type: "bomb", time: "20:40", name: "Sweat" },
+    ],
+  },
+  {
+    short: "SAT",
+    kr: "토요일",
+    title: "팀으로 함께 움직이는 놀토짐 주말 시그니처.",
+    weekend: true,
+    tag: "WEEKEND",
+    time: "10:00",
+    name: "Nolto & Team",
+    desc: "90분 동안 팀으로 함께 움직이며, 놀토짐의 에너지와 커뮤니티를 가장 진하게 느낄 수 있는 수업.",
+  },
+  {
+    short: "SUN",
+    kr: "일요일",
+    title: "한 주를 강하게 마무리하는 90분.",
+    weekend: true,
+    tag: "WEEKEND",
+    time: "10:00",
+    name: "No More Weak",
+    desc: "강도 높은 트레이닝으로 한 주를 마무리하고, 다음 주를 더 강하게 준비하는 일요일 시그니처 수업.",
+  },
+];
+
+const scheduleCard = document.getElementById("scheduleCard");
+const scheduleShort = document.getElementById("scheduleShort");
+const scheduleKr = document.getElementById("scheduleKr");
+const scheduleTitle = document.getElementById("scheduleTitle");
+const scheduleBody = document.getElementById("scheduleBody");
+const dayTabs = document.querySelectorAll(".day-tab");
+const schedulePrev = document.getElementById("schedulePrev");
+const scheduleNext = document.getElementById("scheduleNext");
+
+let currentDay = 0;
+
+function renderSchedule(index) {
+  currentDay = (index + scheduleData.length) % scheduleData.length;
+  const data = scheduleData[currentDay];
+
+  scheduleCard.dataset.bg = data.short;
+  scheduleCard.classList.toggle("is-weekend", Boolean(data.weekend));
+  scheduleShort.textContent = data.short;
+  scheduleKr.textContent = data.kr;
+  scheduleTitle.textContent = data.title;
+
+  dayTabs.forEach((tab, tabIndex) => {
+    tab.classList.toggle("active", tabIndex === currentDay);
+  });
+
+  const activeTab = document.querySelector(".day-tab.active");
+  if (activeTab) {
+    activeTab.scrollIntoView({
+      behavior: "smooth",
+      inline: "center",
+      block: "nearest",
+    });
+  }
+
+  if (data.weekend) {
+    scheduleBody.innerHTML = `
+      <div class="schedule-weekend">
+        <div class="weekend-topline">
+          <span class="session-tag weekend-tag">${data.tag}</span>
+          <p>90 MIN SIGNATURE</p>
+        </div>
+
+        <div class="weekend-main">
+          <h3>${data.time}</h3>
+          <strong>${data.name}</strong>
+          <p>${data.desc}</p>
+        </div>
+      </div>
+    `;
+    return;
+  }
+
+  scheduleBody.innerHTML = `
+    <div class="schedule-session-list">
+      ${data.sessions
+        .map(
+          (session) => `
+            <div class="schedule-session">
+              <span class="session-tag ${session.type}-tag">${session.tag}</span>
+              <time>${session.time}</time>
+              <p>${session.name}</p>
+            </div>
+          `
+        )
+        .join("")}
+    </div>
+  `;
+}
+
+if (scheduleCard) {
+  renderSchedule(0);
+
+  dayTabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      renderSchedule(Number(tab.dataset.day));
+    });
+  });
+
+  schedulePrev.addEventListener("click", () => {
+    renderSchedule(currentDay - 1);
+  });
+
+  scheduleNext.addEventListener("click", () => {
+    renderSchedule(currentDay + 1);
+  });
+}
+
+/* Video Modal */
 
 const openVideo = document.getElementById("openVideo");
 const closeVideo = document.getElementById("closeVideo");
