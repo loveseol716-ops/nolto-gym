@@ -6,7 +6,6 @@
   --white: #ffffff;
   --muted: rgba(244, 239, 227, 0.72);
   --line: rgba(244, 239, 227, 0.22);
-  --soft: rgba(244, 239, 227, 0.08);
 }
 
 * {
@@ -269,7 +268,7 @@ h2 {
   display: flex;
   gap: 18px;
   overflow-x: auto;
-  padding-bottom: 18px;
+  padding: 0 18vw 18px 0;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
@@ -280,7 +279,7 @@ h2 {
 }
 
 .feature-card {
-  flex: 0 0 min(82vw, 460px);
+  flex: 0 0 min(78vw, 460px);
   min-height: 560px;
   border-radius: 38px;
   border: 1px solid var(--line);
@@ -380,39 +379,96 @@ h2 {
 .carousel-control {
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin-top: 10px;
-  color: var(--muted);
-  font-size: 13px;
-  font-weight: 900;
+  gap: 18px;
+  margin-top: 18px;
 }
 
-.progress-track {
-  flex: 1;
-  height: 4px;
+.slide-pill {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 28px 34px;
   border-radius: 999px;
-  background: rgba(244, 239, 227, 0.18);
-  overflow: hidden;
+  background: rgba(255, 255, 255, 0.08);
 }
 
-.progress-bar {
+.slide-dot {
+  width: 16px;
+  height: 16px;
+  border: 0;
+  padding: 0;
+  border-radius: 999px;
+  background: rgba(244, 239, 227, 0.72);
+  overflow: hidden;
+  cursor: pointer;
+  transition:
+    width 0.35s ease,
+    background 0.35s ease;
+}
+
+.slide-dot span {
+  display: block;
   width: 0%;
   height: 100%;
   border-radius: 999px;
   background: var(--ivory);
 }
 
-.progress-bar.running {
-  animation: fillProgress 5s linear forwards;
+.slide-dot.active {
+  width: 96px;
+  background: rgba(244, 239, 227, 0.34);
 }
 
-@keyframes fillProgress {
+.slide-dot.active span {
+  animation: slideProgress 5s linear forwards;
+}
+
+.carousel-control.paused .slide-dot.active span {
+  animation-play-state: paused;
+}
+
+@keyframes slideProgress {
   from {
     width: 0%;
   }
   to {
     width: 100%;
   }
+}
+
+.carousel-toggle {
+  width: 116px;
+  height: 116px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.carousel-toggle span {
+  width: 18px;
+  height: 52px;
+  border-radius: 6px;
+  background: var(--ivory);
+  transition: 0.25s ease;
+}
+
+.carousel-toggle.playing span:first-child {
+  width: 0;
+  height: 0;
+  border-radius: 0;
+  background: transparent;
+  border-top: 22px solid transparent;
+  border-bottom: 22px solid transparent;
+  border-left: 34px solid var(--ivory);
+}
+
+.carousel-toggle.playing span:last-child {
+  display: none;
 }
 
 .programs {
@@ -903,13 +959,55 @@ footer strong {
     width: 100%;
   }
 
+  .feature-scroll {
+    margin-left: -22px;
+    padding-left: 22px;
+    padding-right: 18vw;
+  }
+
   .feature-card {
-    flex-basis: 86vw;
+    flex: 0 0 78vw;
     min-height: 540px;
   }
 
   .feature-visual {
     height: 280px;
+  }
+
+  .carousel-control {
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .slide-pill {
+    gap: 18px;
+    padding: 20px 24px;
+  }
+
+  .slide-dot {
+    width: 13px;
+    height: 13px;
+  }
+
+  .slide-dot.active {
+    width: 76px;
+  }
+
+  .carousel-toggle {
+    width: 76px;
+    height: 76px;
+    gap: 8px;
+  }
+
+  .carousel-toggle span {
+    width: 12px;
+    height: 34px;
+  }
+
+  .carousel-toggle.playing span:first-child {
+    border-top-width: 16px;
+    border-bottom-width: 16px;
+    border-left-width: 24px;
   }
 
   .program-apple {
