@@ -11,7 +11,7 @@ const revealObserver = new IntersectionObserver(
     });
   },
   {
-    threshold: 0.15,
+    threshold: 0.14,
   }
 );
 
@@ -19,12 +19,12 @@ revealElements.forEach((element) => {
   revealObserver.observe(element);
 });
 
-const heroBgText = document.querySelector(".hero-bg-text");
+const bgWord = document.querySelector(".bg-word");
 
 window.addEventListener("scroll", () => {
   const y = window.scrollY;
 
-  if (heroBgText) {
-    heroBgText.style.transform = `translateX(${y * 0.08}px) rotate(-4deg)`;
+  if (bgWord) {
+    bgWord.style.transform = `translateX(${y * 0.08}px) rotate(-4deg)`;
   }
 });
