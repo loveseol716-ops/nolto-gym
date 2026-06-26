@@ -1,56 +1,434 @@
-<section class="section programs">
-  <div class="section-title reveal">
-    <p class="label">PROGRAMS</p>
-    <h2>
-      Gentle, Bomb,<br />
-      그리고 Weekend.
-    </h2>
-  </div>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <div class="program-apple reveal">
-    <div class="program-accordion">
-      <button class="program-item active" type="button" data-program="gentle">
-        <div class="program-item-head">
-          <span class="plus">+</span>
-          <strong>Gentle</strong>
-        </div>
-        <p>
-          처음부터 무리하지 않고, 기본기를 만드는 수업입니다.
-          Gentle Strength는 움직임과 근력의 기초를 만들고,
-          Gentle Sweat는 부담스럽지 않은 강도로 체력과 심폐지구력을 키웁니다.
-        </p>
-      </button>
+  <title>NOLTO GYM | 소규모 그룹 트레이닝 하이브리드 체육관</title>
+  <meta
+    name="description"
+    content="서울 강남에 위치한 소규모 그룹 트레이닝 하이브리드 체육관. 러닝, 근력, 컨디셔닝, 하이록스 스타일 트레이닝을 경험해보세요."
+  />
 
-      <button class="program-item" type="button" data-program="bomb">
-        <div class="program-item-head">
-          <span class="plus">+</span>
-          <strong>Bomb</strong>
-        </div>
-        <p>
-          더 강하게 땀 흘리고, 수행능력을 끌어올리는 수업입니다.
-          Bomb Strength는 도전적인 근력 트레이닝,
-          Bomb Sweat는 고강도 컨디셔닝으로 진행됩니다.
-        </p>
-      </button>
+  <link rel="stylesheet" href="style.css" />
+</head>
 
-      <button class="program-item" type="button" data-program="weekend">
-        <div class="program-item-head">
-          <span class="plus">+</span>
-          <strong>Weekend</strong>
-        </div>
-        <p>
-          놀토짐의 팀 분위기와 에너지를 느끼는 90분 수업입니다.
-          토요일 Nolto & Team, 일요일 No More Weak로
-          더 깊게 몰입하는 주말 프로그램입니다.
-        </p>
-      </button>
-    </div>
+<body>
+  <header class="hero">
+    <nav class="nav">
+      <a href="#" class="logo">NOLTO GYM</a>
+      <a href="https://tally.so/r/LZPRMv" target="_blank" class="nav-cta">무료 트라이얼</a>
+    </nav>
 
-    <div class="program-art" id="programArt">
-      <div class="art-text">
-        <span id="artLabel">GENTLE</span>
-        <strong id="artTitle">MOVE BETTER</strong>
+    <div class="hero-inner">
+      <p class="label reveal">SMALL GROUP HYBRID TRAINING</p>
+      <h1 class="reveal">
+        운동이 다시<br />
+        재밌어지는 곳.
+      </h1>
+      <p class="hero-copy reveal">
+        놀토짐은 러닝, 근력, 컨디셔닝, 하이록스 스타일 트레이닝을 기반으로
+        함께 운동하고 함께 성장하는 소규모 그룹 트레이닝 하이브리드 체육관입니다.
+      </p>
+
+      <div class="hero-actions reveal">
+        <a href="https://tally.so/r/LZPRMv" target="_blank" class="btn primary">무료 트라이얼 신청하기</a>
+        <a href="#overview" class="btn secondary">둘러보기</a>
       </div>
     </div>
+
+    <div class="hero-visual reveal">
+      <div class="visual-card main">
+        <span>HYBRID</span>
+        <strong>RUN<br />LIFT<br />SWEAT</strong>
+      </div>
+      <div class="visual-card small top">SMALL GROUP</div>
+      <div class="visual-card small bottom">EVERY DAY FEELS LIKE SATURDAY</div>
+    </div>
+
+    <div class="bg-word">NOLTO</div>
+  </header>
+
+  <main>
+    <section class="section overview" id="overview">
+      <div class="section-title reveal">
+        <p class="label">QUICK OVERVIEW</p>
+        <h2>일단 핵심부터.</h2>
+        <button class="video-link" id="openVideo" type="button">
+          놀토짐 30초 소개 영상 보기
+        </button>
+      </div>
+
+      <div class="feature-scroll reveal" aria-label="놀토짐 핵심 소개 가로 카드">
+        <article class="feature-card">
+          <div class="feature-visual image-space">
+            <span>IMAGE AREA</span>
+          </div>
+          <div class="feature-text">
+            <span>01</span>
+            <h3>소규모 그룹</h3>
+            <p>너무 많은 인원이 아닌, 코치가 한 사람 한 사람의 움직임과 성장을 볼 수 있는 환경.</p>
+          </div>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-visual image-training">
+            <span>IMAGE AREA</span>
+          </div>
+          <div class="feature-text">
+            <span>02</span>
+            <h3>하이브리드 트레이닝</h3>
+            <p>러닝, 근력, 컨디셔닝, 하이록스 스타일 운동을 유연하게 결합합니다.</p>
+          </div>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-visual image-level">
+            <span>VISUAL AREA</span>
+          </div>
+          <div class="feature-text">
+            <span>03</span>
+            <h3>강도 선택</h3>
+            <p>Gentle부터 Bomb까지, 내 컨디션과 목적에 맞춰 수업을 선택할 수 있습니다.</p>
+          </div>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-visual image-weekend">
+            <span>IMAGE AREA</span>
+          </div>
+          <div class="feature-text">
+            <span>04</span>
+            <h3>주말 90분 프로그램</h3>
+            <p>토요일 Nolto & Team, 일요일 No More Weak로 더 깊게 몰입합니다.</p>
+          </div>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-visual image-growth">
+            <span>IMAGE AREA</span>
+          </div>
+          <div class="feature-text">
+            <span>05</span>
+            <h3>성장 경험</h3>
+            <p>그냥 따라 하는 운동이 아니라, 점점 더 잘하게 되는 운동을 만듭니다.</p>
+          </div>
+        </article>
+
+        <article class="feature-card trial-card">
+          <div class="feature-visual image-trial">
+            <span>FREE TRIAL</span>
+          </div>
+          <div class="feature-text">
+            <span>06</span>
+            <h3>무료 트라이얼</h3>
+            <p>놀토짐이 나에게 맞는 공간인지 직접 수업을 통해 경험해보세요.</p>
+            <a href="https://tally.so/r/LZPRMv" target="_blank" class="mini-cta">신청하기</a>
+          </div>
+        </article>
+      </div>
+
+      <p class="scroll-hint reveal">← 옆으로 넘겨서 핵심을 확인해보세요 →</p>
+    </section>
+
+    <section class="section fit">
+      <div class="section-title reveal">
+        <p class="label">WHO WE ARE FOR</p>
+        <h2>
+          운동은 하고 있는데,<br />
+          성장하고 있다는 느낌이 없다면.
+        </h2>
+      </div>
+
+      <div class="fit-stage reveal">
+        <div class="fit-copy">
+          <p>
+            놀토짐은 단순히 땀만 흘리는 공간이 아닙니다.
+            기존 그룹운동이 지겨워졌거나, 혼자 운동하는 것에 한계를 느꼈거나,
+            강한 운동은 궁금하지만 시작이 부담스러웠던 사람들을 위한 공간입니다.
+          </p>
+        </div>
+
+        <div class="fit-grid">
+          <div class="fit-card">
+            <span>01</span>
+            <strong>지겨움</strong>
+            <p>매번 비슷한 그룹운동에서 벗어나고 싶다면.</p>
+          </div>
+
+          <div class="fit-card">
+            <span>02</span>
+            <strong>정체감</strong>
+            <p>운동은 하지만 더 나아지는 느낌이 없다면.</p>
+          </div>
+
+          <div class="fit-card">
+            <span>03</span>
+            <strong>부담감</strong>
+            <p>크로스핏과 하이록스가 궁금하지만 시작이 두렵다면.</p>
+          </div>
+
+          <div class="fit-card">
+            <span>04</span>
+            <strong>혼잡함</strong>
+            <p>너무 많은 사람들 속에서 운동하는 게 부담스럽다면.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section programs">
+      <div class="section-title reveal">
+        <p class="label">PROGRAMS</p>
+        <h2>
+          Gentle, Bomb,<br />
+          그리고 Weekend.
+        </h2>
+      </div>
+
+      <div class="program-apple reveal">
+        <div class="program-accordion">
+          <button class="program-item active" type="button" data-program="gentle">
+            <div class="program-item-head">
+              <span class="plus">+</span>
+              <strong>Gentle</strong>
+            </div>
+            <p>
+              처음부터 무리하지 않고, 기본기를 만드는 수업입니다.
+              Gentle Strength는 움직임과 근력의 기초를 만들고,
+              Gentle Sweat는 부담스럽지 않은 강도로 체력과 심폐지구력을 키웁니다.
+            </p>
+          </button>
+
+          <button class="program-item" type="button" data-program="bomb">
+            <div class="program-item-head">
+              <span class="plus">+</span>
+              <strong>Bomb</strong>
+            </div>
+            <p>
+              더 강하게 땀 흘리고, 수행능력을 끌어올리는 수업입니다.
+              Bomb Strength는 도전적인 근력 트레이닝,
+              Bomb Sweat는 고강도 컨디셔닝으로 진행됩니다.
+            </p>
+          </button>
+
+          <button class="program-item" type="button" data-program="weekend">
+            <div class="program-item-head">
+              <span class="plus">+</span>
+              <strong>Weekend</strong>
+            </div>
+            <p>
+              놀토짐의 팀 분위기와 에너지를 느끼는 90분 수업입니다.
+              토요일 Nolto & Team, 일요일 No More Weak로
+              더 깊게 몰입하는 주말 프로그램입니다.
+            </p>
+          </button>
+        </div>
+
+        <div class="program-art gentle-art" id="programArt">
+          <div class="art-text">
+            <span id="artLabel">GENTLE</span>
+            <strong id="artTitle">MOVE BETTER</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section schedule-section" id="schedule">
+      <div class="section-title reveal">
+        <p class="label">WEEKLY SCHEDULE</p>
+        <h2>
+          한눈에 보는<br />
+          놀토짐 주간 시간표.
+        </h2>
+        <p class="desc">모바일에서는 좌우로 밀어서 전체 시간표를 확인할 수 있습니다.</p>
+      </div>
+
+      <div class="schedule-wrapper reveal">
+        <div class="schedule-header">
+          <span>NOLTO GYM</span>
+          <strong>WEEK SCHEDULE</strong>
+        </div>
+
+        <div class="schedule-table">
+          <div class="cell head time-head"></div>
+          <div class="cell head">MON</div>
+          <div class="cell head">TUE</div>
+          <div class="cell head">WED</div>
+          <div class="cell head">THU</div>
+          <div class="cell head">FRI</div>
+          <div class="cell head">SAT</div>
+          <div class="cell head">SUN</div>
+
+          <div class="cell time">07:20</div>
+          <div class="cell gentle">Gentle<br />Strength</div>
+          <div class="cell gentle">Gentle<br />Sweat</div>
+          <div class="cell bomb">Bomb<br />Strength</div>
+          <div class="cell open">Open<br />Gym</div>
+          <div class="cell bomb">Bomb<br />Sweat</div>
+          <div class="cell empty"></div>
+          <div class="cell empty"></div>
+
+          <div class="cell time">08:20<br /><small>~10:00</small></div>
+          <div class="cell open">Open<br />Gym</div>
+          <div class="cell track">Track<br />Run</div>
+          <div class="cell open">Open<br />Gym</div>
+          <div class="cell track">Track<br />Run</div>
+          <div class="cell open">Open<br />Gym</div>
+          <div class="cell empty"></div>
+          <div class="cell empty"></div>
+
+          <div class="cell time">10:00</div>
+          <div class="cell bomb">Bomb<br />Sweat</div>
+          <div class="cell empty"></div>
+          <div class="cell gentle">Gentle<br />Sweat</div>
+          <div class="cell empty"></div>
+          <div class="cell gentle">Gentle<br />Strength</div>
+          <div class="cell empty"></div>
+          <div class="cell empty"></div>
+
+          <div class="cell time">12:10</div>
+          <div class="cell gentle">Gentle<br />Strength</div>
+          <div class="cell gentle">Gentle<br />Sweat</div>
+          <div class="cell bomb">Bomb<br />Strength</div>
+          <div class="cell open">Open<br />Gym</div>
+          <div class="cell bomb">Bomb<br />Sweat</div>
+          <div class="cell weekend">Nolto &<br />Team</div>
+          <div class="cell weekend">No More<br />Weak</div>
+
+          <div class="cell time">18:20</div>
+          <div class="cell gentle">Gentle<br />Strength</div>
+          <div class="cell gentle">Gentle<br />Sweat</div>
+          <div class="cell bomb">Bomb<br />Strength</div>
+          <div class="cell open">Open<br />Gym</div>
+          <div class="cell bomb">Bomb<br />Sweat</div>
+          <div class="cell empty"></div>
+          <div class="cell empty"></div>
+
+          <div class="cell time">19:30</div>
+          <div class="cell bomb">Bomb<br />Sweat</div>
+          <div class="cell bomb">Bomb<br />Strength</div>
+          <div class="cell gentle">Gentle<br />Sweat</div>
+          <div class="cell special">You in?</div>
+          <div class="cell gentle">Gentle<br />Strength</div>
+          <div class="cell empty"></div>
+          <div class="cell empty"></div>
+
+          <div class="cell time">20:40</div>
+          <div class="cell gentle">Gentle<br />Strength</div>
+          <div class="cell gentle">Gentle<br />Sweat</div>
+          <div class="cell bomb">Bomb<br />Strength</div>
+          <div class="cell empty"></div>
+          <div class="cell bomb">Bomb<br />Sweat</div>
+          <div class="cell empty"></div>
+          <div class="cell empty"></div>
+        </div>
+      </div>
+
+      <div class="choose-grid reveal">
+        <div>
+          <span>START</span>
+          <strong>Gentle로 시작하기</strong>
+          <p>기초 근력과 체력을 안전하게 쌓고 싶은 분.</p>
+        </div>
+        <div>
+          <span>PUSH</span>
+          <strong>Bomb로 강하게 운동하기</strong>
+          <p>더 많은 땀과 더 높은 강도를 원하는 분.</p>
+        </div>
+        <div>
+          <span>WEEKEND</span>
+          <strong>주말에 몰입하기</strong>
+          <p>90분 동안 팀 분위기와 고강도 트레이닝을 경험하고 싶은 분.</p>
+        </div>
+      </div>
+
+      <p class="notice reveal">
+        Track Run은 코치 훈련 일정으로 변동될 수 있습니다.<br />
+        Open Gym은 자유롭게 이용 가능합니다.<br />
+        스케줄은 운영 상황에 따라 변경될 수 있습니다.
+      </p>
+    </section>
+
+    <section class="section why">
+      <div class="section-title reveal">
+        <p class="label">WHY NOLTO</p>
+        <h2>
+          너무 많은 사람들 사이에서<br />
+          운동하고 싶지 않은 사람들을 위해.
+        </h2>
+      </div>
+
+      <div class="why-copy reveal">
+        <p>
+          놀토짐은 대형 그룹운동 센터가 아닙니다.
+          우리는 한 번에 더 많은 사람을 모으기보다,
+          한 사람의 움직임과 성장을 더 가까이 봅니다.
+        </p>
+      </div>
+
+      <div class="why-grid">
+        <div class="why-card reveal">
+          <strong>몰입할 수 있는 크기</strong>
+          <p>작지만 밀도 있게. 복잡하지 않지만 충분하게.</p>
+        </div>
+        <div class="why-card reveal">
+          <strong>계속 바뀌는 자극</strong>
+          <p>하나의 운동 방식에 갇히지 않고, 필요한 방식으로 유연하게 변화합니다.</p>
+        </div>
+        <div class="why-card reveal">
+          <strong>성장을 리드하는 코칭</strong>
+          <p>운동을 시키는 것이 아니라, 더 잘할 수 있도록 방향을 잡아줍니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section location">
+      <div class="section-title reveal">
+        <p class="label">LOCATION</p>
+        <h2>강남구청역 · 학동역 인근</h2>
+        <p class="desc">서울 강남구 언주로146길 9 지하1층</p>
+      </div>
+
+      <div class="button-group reveal">
+        <a href="https://naver.me/GM3oPT6L" target="_blank" class="btn secondary">네이버 지도 보기</a>
+        <a href="https://www.instagram.com/nolto_hybridgym?igsh=YWsyd3BsNm1wYmR6&utm_source=qr" target="_blank" class="btn secondary">인스타그램 보기</a>
+      </div>
+    </section>
+
+    <section class="trial">
+      <div class="trial-content reveal">
+        <p class="label">FREE TRIAL</p>
+        <h2>
+          놀토짐을 직접<br />
+          경험해보세요.
+        </h2>
+        <p>
+          나에게 맞는 공간인지 가장 빠르게 아는 방법은
+          직접 한 번 수업을 들어보는 것입니다.
+        </p>
+
+        <a href="https://tally.so/r/LZPRMv" target="_blank" class="btn primary big">무료 트라이얼 신청하기</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <strong>NOLTO GYM</strong>
+    <span>Every day feels like Saturday.</span>
+  </footer>
+
+  <div class="video-modal" id="videoModal">
+    <button class="modal-close" id="closeVideo" type="button">×</button>
+    <div class="video-box">
+      <video controls playsinline>
+        <source src="assets/nolto-intro.mp4" type="video/mp4" />
+        브라우저가 영상을 지원하지 않습니다.
+      </video>
+      <p>영상 파일을 추가하려면 <strong>assets/nolto-intro.mp4</strong>로 업로드하면 됩니다.</p>
+    </div>
   </div>
-</section>
+
+  <script src="script.js"></script>
+</body>
+</html>
