@@ -1484,3 +1484,72 @@ footer strong {
     font-size: clamp(38px, 12vw, 56px);
   }
 }
+/* === Quick Overview 실제 이미지 적용 PNG 버전 === */
+
+.image-space {
+  background:
+    linear-gradient(rgba(3, 29, 22, 0.04), rgba(3, 29, 22, 0.28)),
+    url("assets/overview-03-space.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.image-training {
+  background:
+    linear-gradient(rgba(3, 29, 22, 0.04), rgba(3, 29, 22, 0.28)),
+    url("assets/overview-06-equipment.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.image-level {
+  background:
+    linear-gradient(rgba(3, 29, 22, 0.04), rgba(3, 29, 22, 0.28)),
+    url("assets/overview-05-coaching.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.image-weekend {
+  background:
+    linear-gradient(rgba(3, 29, 22, 0.04), rgba(3, 29, 22, 0.28)),
+    url("assets/overview-04-detail.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.image-growth {
+  background:
+    linear-gradient(rgba(3, 29, 22, 0.04), rgba(3, 29, 22, 0.28)),
+    url("assets/overview-01-brand.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.image-trial {
+  background:
+    linear-gradient(rgba(3, 29, 22, 0.04), rgba(3, 29, 22, 0.28)),
+    url("assets/overview-02-shower.png");
+  background-size: cover;
+  background-position: center;
+}
+
+/* 카드 안 IMAGE AREA 글씨 숨기기 */
+.feature-visual span {
+  display: none;
+}
+
+/* === Location 지도 이미지 적용 PNG 버전 === */
+
+.location-visual-card {
+  background:
+    linear-gradient(rgba(3, 29, 22, 0.04), rgba(3, 29, 22, 0.18)),
+    url("assets/location-map.png");
+  background-size: cover;
+  background-position: center;
+}
+
+/* 기존 추상 지도 그래픽 숨기기 */
+.location-visual-card > * {
+  display: none;
+}
