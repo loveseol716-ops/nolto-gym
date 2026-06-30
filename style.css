@@ -1553,36 +1553,36 @@ footer strong {
 .location-visual-card > * {
   display: none;
 }
-/* === Program Section 실제 이미지 적용 === */
+/* === Program Section 실제 이미지 PNG 버전 === */
 
 .program-art.gentle-art {
   background:
     linear-gradient(rgba(3, 29, 22, 0.08), rgba(3, 29, 22, 0.42)),
-    url("assets/program-gentle.png");
-  background-size: cover;
-  background-position: center;
+    url("./assets/program-gentle.png") !important;
+  background-size: cover !important;
+  background-position: center !important;
 }
 
 .program-art.bomb-art {
   background:
     linear-gradient(rgba(3, 29, 22, 0.08), rgba(3, 29, 22, 0.42)),
-    url("assets/program-bomb.png");
-  background-size: cover;
-  background-position: center;
+    url("./assets/program-bomb.png") !important;
+  background-size: cover !important;
+  background-position: center !important;
 }
 
 .program-art.weekend-art {
   background:
     linear-gradient(rgba(3, 29, 22, 0.08), rgba(3, 29, 22, 0.42)),
-    url("assets/program-weekend.png");
-  background-size: cover;
-  background-position: center;
+    url("./assets/program-weekend.png") !important;
+  background-size: cover !important;
+  background-position: center !important;
 }
 
 /* 기존 추상 그래픽 숨기기 */
 .program-art::before,
 .program-art::after {
-  display: none;
+  display: none !important;
 }
 
 /* 이미지 위 텍스트 가독성 */
