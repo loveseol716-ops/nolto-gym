@@ -1558,7 +1558,7 @@ footer strong {
 .program-art.gentle-art {
   background:
     linear-gradient(rgba(3, 29, 22, 0.08), rgba(3, 29, 22, 0.42)),
-    url("assets/program-gentle.jpg");
+    url("assets/program-gentle.png");
   background-size: cover;
   background-position: center;
 }
@@ -1566,7 +1566,7 @@ footer strong {
 .program-art.bomb-art {
   background:
     linear-gradient(rgba(3, 29, 22, 0.08), rgba(3, 29, 22, 0.42)),
-    url("assets/program-bomb.jpg");
+    url("assets/program-bomb.png");
   background-size: cover;
   background-position: center;
 }
@@ -1574,7 +1574,7 @@ footer strong {
 .program-art.weekend-art {
   background:
     linear-gradient(rgba(3, 29, 22, 0.08), rgba(3, 29, 22, 0.42)),
-    url("assets/program-weekend.jpg");
+    url("assets/program-weekend.png");
   background-size: cover;
   background-position: center;
 }
