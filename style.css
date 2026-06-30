@@ -1553,3 +1553,40 @@ footer strong {
 .location-visual-card > * {
   display: none;
 }
+/* === Program Section 실제 이미지 적용 === */
+
+.program-art.gentle-art {
+  background:
+    linear-gradient(rgba(3, 29, 22, 0.08), rgba(3, 29, 22, 0.42)),
+    url("assets/program-gentle.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.program-art.bomb-art {
+  background:
+    linear-gradient(rgba(3, 29, 22, 0.08), rgba(3, 29, 22, 0.42)),
+    url("assets/program-bomb.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.program-art.weekend-art {
+  background:
+    linear-gradient(rgba(3, 29, 22, 0.08), rgba(3, 29, 22, 0.42)),
+    url("assets/program-weekend.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+/* 기존 추상 그래픽 숨기기 */
+.program-art::before,
+.program-art::after {
+  display: none;
+}
+
+/* 이미지 위 텍스트 가독성 */
+.art-text span,
+.art-text strong {
+  text-shadow: 0 10px 40px rgba(0, 0, 0, 0.65);
+}
