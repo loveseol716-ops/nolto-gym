@@ -912,7 +912,7 @@ h2 {
   overflow: hidden;
   background:
     linear-gradient(rgba(3, 29, 22, 0.04), rgba(3, 29, 22, 0.22)),
-    url("assets/location-gym.png");
+    url("assets/location-map.png");
   background-size: cover;
   background-position: center;
 }
