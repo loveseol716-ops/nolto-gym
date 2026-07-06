@@ -29,6 +29,7 @@ window.addEventListener("scroll", () => {
   }
 });
 
+
 /* Infinite Overview Carousel */
 
 const featureScroll = document.getElementById("featureScroll");
@@ -93,6 +94,8 @@ if (featureScroll && originalCards.length > 0) {
   function scrollToPosition(position, smooth = true) {
     currentPosition = position;
 
+    if (!allCards[currentPosition]) return;
+
     allCards[currentPosition].scrollIntoView({
       behavior: smooth ? "smooth" : "auto",
       inline: "center",
@@ -121,6 +124,8 @@ if (featureScroll && originalCards.length > 0) {
   function goNextFeature() {
     currentPosition += 1;
 
+    if (!allCards[currentPosition]) return;
+
     const realIndex = Number(allCards[currentPosition].dataset.realIndex);
     currentFeature = realIndex;
 
@@ -146,16 +151,23 @@ if (featureScroll && originalCards.length > 0) {
   function pauseCarousel() {
     isPaused = true;
     clearTimeout(carouselTimer);
-    carouselControl.classList.add("paused");
-    carouselToggle.classList.add("playing");
-    carouselToggle.setAttribute("aria-label", "슬라이드 재생");
+
+    if (carouselControl) carouselControl.classList.add("paused");
+    if (carouselToggle) {
+      carouselToggle.classList.add("playing");
+      carouselToggle.setAttribute("aria-label", "슬라이드 재생");
+    }
   }
 
   function resumeCarousel() {
     isPaused = false;
-    carouselControl.classList.remove("paused");
-    carouselToggle.classList.remove("playing");
-    carouselToggle.setAttribute("aria-label", "슬라이드 일시정지");
+
+    if (carouselControl) carouselControl.classList.remove("paused");
+    if (carouselToggle) {
+      carouselToggle.classList.remove("playing");
+      carouselToggle.setAttribute("aria-label", "슬라이드 일시정지");
+    }
+
     updateDots();
     startCarousel();
   }
@@ -203,13 +215,15 @@ if (featureScroll && originalCards.length > 0) {
     });
   });
 
-  carouselToggle.addEventListener("click", () => {
-    if (isPaused) {
-      resumeCarousel();
-    } else {
-      pauseCarousel();
-    }
-  });
+  if (carouselToggle) {
+    carouselToggle.addEventListener("click", () => {
+      if (isPaused) {
+        resumeCarousel();
+      } else {
+        pauseCarousel();
+      }
+    });
+  }
 
   let scrollEndTimer = null;
 
@@ -225,6 +239,7 @@ if (featureScroll && originalCards.length > 0) {
     }, 130);
   });
 }
+
 
 /* Program Accordion */
 
@@ -256,16 +271,21 @@ programItems.forEach((item) => {
     const key = item.dataset.program;
     const data = programData[key];
 
+    if (!data) return;
+
     programItems.forEach((el) => el.classList.remove("active"));
     item.classList.add("active");
 
-    programArt.classList.remove("gentle-art", "bomb-art", "weekend-art");
-    programArt.classList.add(data.artClass);
+    if (programArt) {
+      programArt.classList.remove("gentle-art", "bomb-art", "weekend-art");
+      programArt.classList.add(data.artClass);
+    }
 
-    artLabel.textContent = data.label;
-    artTitle.textContent = data.title;
+    if (artLabel) artLabel.textContent = data.label;
+    if (artTitle) artTitle.textContent = data.title;
   });
 });
+
 
 /* Schedule Selector */
 
@@ -363,6 +383,8 @@ const scheduleNext = document.getElementById("scheduleNext");
 let currentDay = 0;
 
 function renderSchedule(index) {
+  if (!scheduleCard || !scheduleShort || !scheduleKr || !scheduleTitle || !scheduleBody) return;
+
   currentDay = (index + scheduleData.length) % scheduleData.length;
   const data = scheduleData[currentDay];
 
@@ -429,43 +451,75 @@ if (scheduleCard) {
     });
   });
 
-  schedulePrev.addEventListener("click", () => {
-    renderSchedule(currentDay - 1);
-  });
+  if (schedulePrev) {
+    schedulePrev.addEventListener("click", () => {
+      renderSchedule(currentDay - 1);
+    });
+  }
 
-  scheduleNext.addEventListener("click", () => {
-    renderSchedule(currentDay + 1);
-  });
+  if (scheduleNext) {
+    scheduleNext.addEventListener("click", () => {
+      renderSchedule(currentDay + 1);
+    });
+  }
 }
+
 
 /* Video Modal */
 
 const openVideo = document.getElementById("openVideo");
 const closeVideo = document.getElementById("closeVideo");
+const closeVideoBackdrop = document.getElementById("closeVideoBackdrop");
 const videoModal = document.getElementById("videoModal");
+const introVideo = document.getElementById("introVideo");
 
-if (openVideo && closeVideo && videoModal) {
-  openVideo.addEventListener("click", () => {
-    videoModal.classList.add("open");
-    document.body.style.overflow = "hidden";
-  });
+function openVideoModal() {
+  if (!videoModal) return;
 
-  closeVideo.addEventListener("click", () => {
-    videoModal.classList.remove("open");
-    document.body.style.overflow = "";
-  });
+  videoModal.classList.add("active");
+  videoModal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
 
+  if (introVideo) {
+    introVideo.currentTime = 0;
+  }
+}
+
+function closeVideoModal() {
+  if (!videoModal) return;
+
+  videoModal.classList.remove("active");
+  videoModal.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+
+  if (introVideo) {
+    introVideo.pause();
+    introVideo.currentTime = 0;
+  }
+}
+
+if (openVideo) {
+  openVideo.addEventListener("click", openVideoModal);
+}
+
+if (closeVideo) {
+  closeVideo.addEventListener("click", closeVideoModal);
+}
+
+if (closeVideoBackdrop) {
+  closeVideoBackdrop.addEventListener("click", closeVideoModal);
+}
+
+if (videoModal) {
   videoModal.addEventListener("click", (event) => {
     if (event.target === videoModal) {
-      videoModal.classList.remove("open");
-      document.body.style.overflow = "";
-    }
-  });
-
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      videoModal.classList.remove("open");
-      document.body.style.overflow = "";
+      closeVideoModal();
     }
   });
 }
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    closeVideoModal();
+  }
+});
