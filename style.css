@@ -1590,3 +1590,34 @@ footer strong {
 .art-text strong {
   text-shadow: 0 10px 40px rgba(0, 0, 0, 0.65);
 }
+/* === 30초 소개 영상 === */
+
+.video-card {
+  width: 100%;
+  margin-top: 28px;
+  border-radius: 28px;
+  overflow: hidden;
+  background: #071f18;
+  border: 1px solid rgba(244, 239, 227, 0.14);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.22);
+}
+
+.video-card video {
+  width: 100%;
+  display: block;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: #000;
+}
+
+/* 모바일에서는 영상이 너무 작아 보이지 않게 */
+@media (max-width: 640px) {
+  .video-card {
+    margin-top: 22px;
+    border-radius: 22px;
+  }
+
+  .video-card video {
+    aspect-ratio: 9 / 16;
+  }
+}
