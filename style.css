@@ -247,6 +247,8 @@ h2 {
   background: var(--dark);
 }
 
+/* === 30초 소개 영상 버튼 === */
+
 .video-link {
   margin-top: 8px;
   border: 0;
@@ -258,6 +260,10 @@ h2 {
   text-decoration: underline;
   text-underline-offset: 6px;
   cursor: pointer;
+}
+
+.video-link:hover {
+  opacity: 0.72;
 }
 
 .feature-carousel {
@@ -297,46 +303,55 @@ h2 {
 }
 
 .feature-visual span {
-  color: rgba(244, 239, 227, 0.52);
-  font-size: 12px;
-  font-weight: 950;
-  letter-spacing: 0.18em;
+  display: none;
 }
 
 .image-space {
   background:
-    radial-gradient(circle at 70% 35%, rgba(244, 239, 227, 0.32), transparent 26%),
-    linear-gradient(145deg, rgba(244, 239, 227, 0.17), rgba(244, 239, 227, 0.04));
+    linear-gradient(rgba(3, 29, 22, 0.04), rgba(3, 29, 22, 0.28)),
+    url("assets/overview-03-space.png");
+  background-size: cover;
+  background-position: center;
 }
 
 .image-training {
   background:
-    radial-gradient(circle at 40% 55%, rgba(255, 255, 255, 0.28), transparent 28%),
-    linear-gradient(145deg, rgba(244, 239, 227, 0.1), rgba(0, 0, 0, 0.12));
+    linear-gradient(rgba(3, 29, 22, 0.04), rgba(3, 29, 22, 0.28)),
+    url("assets/overview-06-equipment.png");
+  background-size: cover;
+  background-position: center;
 }
 
 .image-level {
   background:
-    linear-gradient(90deg, rgba(244, 239, 227, 0.08), rgba(244, 239, 227, 0.22)),
-    radial-gradient(circle at 80% 50%, rgba(255, 255, 255, 0.24), transparent 28%);
+    linear-gradient(rgba(3, 29, 22, 0.04), rgba(3, 29, 22, 0.28)),
+    url("assets/overview-05-coaching.png");
+  background-size: cover;
+  background-position: center;
 }
 
 .image-weekend {
   background:
-    radial-gradient(circle at 75% 35%, rgba(244, 239, 227, 0.35), transparent 30%),
-    linear-gradient(145deg, rgba(255, 255, 255, 0.13), rgba(244, 239, 227, 0.04));
+    linear-gradient(rgba(3, 29, 22, 0.04), rgba(3, 29, 22, 0.28)),
+    url("assets/overview-04-detail.png");
+  background-size: cover;
+  background-position: center;
 }
 
 .image-growth {
   background:
-    radial-gradient(circle at 55% 40%, rgba(244, 239, 227, 0.36), transparent 28%),
-    linear-gradient(145deg, rgba(244, 239, 227, 0.12), rgba(244, 239, 227, 0.02));
+    linear-gradient(rgba(3, 29, 22, 0.04), rgba(3, 29, 22, 0.28)),
+    url("assets/overview-01-brand.png");
+  background-size: cover;
+  background-position: center;
 }
 
 .image-trial {
   background:
-    radial-gradient(circle at 50% 50%, rgba(244, 239, 227, 0.46), transparent 32%),
-    linear-gradient(145deg, rgba(244, 239, 227, 0.22), rgba(244, 239, 227, 0.06));
+    linear-gradient(rgba(3, 29, 22, 0.04), rgba(3, 29, 22, 0.28)),
+    url("assets/overview-02-shower.png");
+  background-size: cover;
+  background-position: center;
 }
 
 .feature-text {
@@ -402,9 +417,7 @@ h2 {
   background: rgba(244, 239, 227, 0.7);
   overflow: hidden;
   cursor: pointer;
-  transition:
-    width 0.35s ease,
-    background 0.35s ease;
+  transition: width 0.35s ease, background 0.35s ease;
 }
 
 .slide-dot span {
@@ -432,6 +445,7 @@ h2 {
   from {
     width: 0%;
   }
+
   to {
     width: 100%;
   }
@@ -533,10 +547,7 @@ h2 {
   font-size: 26px;
   font-weight: 400;
   line-height: 1;
-  transition:
-    transform 0.3s ease,
-    background 0.3s ease,
-    color 0.3s ease;
+  transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
 }
 
 .program-item strong {
@@ -580,44 +591,48 @@ h2 {
 .program-art {
   position: relative;
   min-height: 520px;
-  overflow: visible;
+  overflow: hidden;
+  border-radius: 42px;
+  border: 1px solid rgba(244, 239, 227, 0.18);
   transition: background 0.45s ease;
 }
 
-.program-art::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: min(72vw, 560px);
-  height: min(72vw, 560px);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  background: linear-gradient(135deg, rgba(244, 239, 227, 0.32), rgba(244, 239, 227, 0.04));
+.program-art::before,
+.program-art::after {
+  display: none !important;
 }
 
-.program-art::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 48%;
-  width: min(48vw, 360px);
-  height: min(62vw, 460px);
-  border-radius: 42px;
-  transform: translate(-50%, -50%) rotate(-8deg);
-  background: linear-gradient(160deg, rgba(244, 239, 227, 0.9), rgba(244, 239, 227, 0.16));
-  box-shadow:
-    0 40px 120px rgba(0, 0, 0, 0.35),
-    inset 0 0 0 1px rgba(244, 239, 227, 0.4);
+.program-art.gentle-art {
+  background:
+    linear-gradient(rgba(3, 29, 22, 0.08), rgba(3, 29, 22, 0.62)),
+    url("./assets/program-gentle.png") !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+.program-art.bomb-art {
+  background:
+    linear-gradient(rgba(3, 29, 22, 0.08), rgba(3, 29, 22, 0.62)),
+    url("./assets/program-bomb.png") !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+.program-art.weekend-art {
+  background:
+    linear-gradient(rgba(3, 29, 22, 0.08), rgba(3, 29, 22, 0.62)),
+    url("./assets/program-weekend.png") !important;
+  background-size: cover !important;
+  background-position: center !important;
 }
 
 .art-text {
   position: absolute;
-  left: 50%;
-  bottom: 20px;
-  transform: translateX(-50%);
+  left: 32px;
+  right: 32px;
+  bottom: 34px;
   z-index: 2;
-  text-align: center;
+  text-align: left;
 }
 
 .art-text span {
@@ -627,42 +642,16 @@ h2 {
   font-size: 12px;
   font-weight: 950;
   letter-spacing: 0.18em;
+  text-shadow: 0 10px 40px rgba(0, 0, 0, 0.65);
 }
 
 .art-text strong {
+  display: block;
+  max-width: 520px;
   font-size: clamp(30px, 7vw, 82px);
   line-height: 0.9;
   letter-spacing: -0.08em;
-}
-
-.program-art.gentle-art {
-  background:
-    radial-gradient(circle at 50% 45%, rgba(244, 239, 227, 0.52), transparent 24%),
-    radial-gradient(circle at 50% 45%, rgba(244, 239, 227, 0.18), transparent 42%);
-}
-
-.program-art.bomb-art {
-  background:
-    radial-gradient(circle at 50% 45%, rgba(255, 255, 255, 0.68), transparent 22%),
-    radial-gradient(circle at 50% 45%, rgba(244, 239, 227, 0.28), transparent 46%);
-}
-
-.program-art.bomb-art::after {
-  border-radius: 50%;
-  transform: translate(-50%, -50%) rotate(12deg);
-}
-
-.program-art.weekend-art {
-  background:
-    radial-gradient(circle at 50% 45%, rgba(244, 239, 227, 0.72), transparent 25%),
-    radial-gradient(circle at 50% 45%, rgba(244, 239, 227, 0.26), transparent 48%);
-}
-
-.program-art.weekend-art::after {
-  width: min(62vw, 520px);
-  height: min(42vw, 340px);
-  border-radius: 999px;
-  transform: translate(-50%, -50%) rotate(0deg);
+  text-shadow: 0 10px 40px rgba(0, 0, 0, 0.65);
 }
 
 .schedule-section {
@@ -922,101 +911,14 @@ h2 {
   border-radius: 42px;
   overflow: hidden;
   background:
-    radial-gradient(circle at 50% 50%, rgba(244, 239, 227, 0.24), transparent 28%),
-    linear-gradient(145deg, rgba(244, 239, 227, 0.12), rgba(244, 239, 227, 0.035));
+    linear-gradient(rgba(3, 29, 22, 0.04), rgba(3, 29, 22, 0.22)),
+    url("assets/location-gym.png");
+  background-size: cover;
+  background-position: center;
 }
 
-.location-big-type {
-  position: absolute;
-  left: 28px;
-  bottom: 18px;
-  color: rgba(244, 239, 227, 0.12);
-  font-size: clamp(120px, 22vw, 260px);
-  line-height: 0.78;
-  font-weight: 950;
-  letter-spacing: -0.1em;
-}
-
-.map-line {
-  position: absolute;
-  height: 4px;
-  border-radius: 999px;
-  background: rgba(244, 239, 227, 0.22);
-  transform-origin: center;
-}
-
-.line-one {
-  width: 90%;
-  left: -8%;
-  top: 34%;
-  transform: rotate(-18deg);
-}
-
-.line-two {
-  width: 78%;
-  right: -12%;
-  top: 56%;
-  transform: rotate(22deg);
-}
-
-.line-three {
-  width: 62%;
-  left: 15%;
-  top: 72%;
-  transform: rotate(-6deg);
-}
-
-.location-pin {
-  position: absolute;
-  left: 50%;
-  top: 48%;
-  width: 96px;
-  height: 96px;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(244, 239, 227, 0.16);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow:
-    0 0 0 16px rgba(244, 239, 227, 0.055),
-    0 0 100px rgba(244, 239, 227, 0.2);
-}
-
-.location-pin span {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: var(--ivory);
-}
-
-.location-floating-tag {
-  position: absolute;
-  padding: 13px 18px;
-  border-radius: 999px;
-  border: 1px solid var(--line);
-  background: rgba(3, 29, 22, 0.38);
-  backdrop-filter: blur(18px);
-  color: var(--ivory);
-  font-size: 12px;
-  font-weight: 950;
-  letter-spacing: 0.12em;
-}
-
-.tag-one {
-  left: 26px;
-  top: 28px;
-}
-
-.tag-two {
-  right: 28px;
-  top: 102px;
-}
-
-.tag-three {
-  left: 50%;
-  bottom: 98px;
-  transform: translateX(-50%);
+.location-visual-card > * {
+  display: none;
 }
 
 .location-info-card {
@@ -1154,49 +1056,59 @@ footer strong {
   letter-spacing: -0.035em;
 }
 
+/* === 30초 소개 영상 모달 === */
+
 .video-modal {
   position: fixed;
   inset: 0;
   z-index: 9999;
   display: none;
-  padding: 70px 18px 24px;
-  background: rgba(0, 0, 0, 0.86);
-  backdrop-filter: blur(18px);
-}
-
-.video-modal.open {
-  display: flex;
   align-items: center;
   justify-content: center;
+  padding: 20px;
+}
+
+.video-modal.active {
+  display: flex;
+}
+
+.video-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.76);
+  backdrop-filter: blur(10px);
 }
 
 .video-box {
+  position: relative;
+  z-index: 1;
   width: min(920px, 100%);
+  border-radius: 28px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 30px 100px rgba(0, 0, 0, 0.56);
 }
 
 .video-box video {
   width: 100%;
-  border-radius: 24px;
+  display: block;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
   background: #000;
 }
 
-.video-box p {
-  margin-top: 14px;
-  color: var(--muted);
-  text-align: center;
-}
-
 .modal-close {
-  position: fixed;
-  right: 18px;
-  top: 18px;
-  width: 44px;
-  height: 44px;
-  border: 1px solid rgba(244, 239, 227, 0.4);
-  border-radius: 50%;
-  background: rgba(244, 239, 227, 0.08);
-  color: var(--ivory);
-  font-size: 30px;
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  z-index: 2;
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  background: rgba(0, 0, 0, 0.62);
+  color: #fff;
+  font-size: 28px;
   line-height: 1;
   cursor: pointer;
 }
@@ -1350,17 +1262,9 @@ footer strong {
     min-height: 430px;
   }
 
-  .program-art::before {
-    width: 72vw;
-    height: 72vw;
-  }
-
-  .program-art::after {
-    width: 36vw;
-    height: 52vw;
-  }
-
   .art-text {
+    left: 22px;
+    right: 22px;
     bottom: 28px;
   }
 
@@ -1432,17 +1336,20 @@ footer strong {
     padding: 24px;
   }
 
-  .location-floating-tag {
-    font-size: 10px;
-    padding: 10px 13px;
-  }
-
-  .tag-three {
-    width: max-content;
-  }
-
   .address-block strong {
     font-size: 21px;
+  }
+
+  .video-modal {
+    padding: 14px;
+  }
+
+  .video-box {
+    border-radius: 22px;
+  }
+
+  .video-box video {
+    aspect-ratio: 9 / 16;
   }
 
   .floating-cta {
@@ -1482,142 +1389,5 @@ footer strong {
 
   h2 {
     font-size: clamp(38px, 12vw, 56px);
-  }
-}
-/* === Quick Overview 실제 이미지 적용 PNG 버전 === */
-
-.image-space {
-  background:
-    linear-gradient(rgba(3, 29, 22, 0.04), rgba(3, 29, 22, 0.28)),
-    url("assets/overview-03-space.png");
-  background-size: cover;
-  background-position: center;
-}
-
-.image-training {
-  background:
-    linear-gradient(rgba(3, 29, 22, 0.04), rgba(3, 29, 22, 0.28)),
-    url("assets/overview-06-equipment.png");
-  background-size: cover;
-  background-position: center;
-}
-
-.image-level {
-  background:
-    linear-gradient(rgba(3, 29, 22, 0.04), rgba(3, 29, 22, 0.28)),
-    url("assets/overview-05-coaching.png");
-  background-size: cover;
-  background-position: center;
-}
-
-.image-weekend {
-  background:
-    linear-gradient(rgba(3, 29, 22, 0.04), rgba(3, 29, 22, 0.28)),
-    url("assets/overview-04-detail.png");
-  background-size: cover;
-  background-position: center;
-}
-
-.image-growth {
-  background:
-    linear-gradient(rgba(3, 29, 22, 0.04), rgba(3, 29, 22, 0.28)),
-    url("assets/overview-01-brand.png");
-  background-size: cover;
-  background-position: center;
-}
-
-.image-trial {
-  background:
-    linear-gradient(rgba(3, 29, 22, 0.04), rgba(3, 29, 22, 0.28)),
-    url("assets/overview-02-shower.png");
-  background-size: cover;
-  background-position: center;
-}
-
-/* 카드 안 IMAGE AREA 글씨 숨기기 */
-.feature-visual span {
-  display: none;
-}
-
-/* === Location 지도 이미지 적용 PNG 버전 === */
-
-.location-visual-card {
-  background:
-    linear-gradient(rgba(3, 29, 22, 0.04), rgba(3, 29, 22, 0.18)),
-    url("assets/location-map.png");
-  background-size: cover;
-  background-position: center;
-}
-
-/* 기존 추상 지도 그래픽 숨기기 */
-.location-visual-card > * {
-  display: none;
-}
-/* === Program Section 실제 이미지 PNG 버전 === */
-
-.program-art.gentle-art {
-  background:
-    linear-gradient(rgba(3, 29, 22, 0.08), rgba(3, 29, 22, 0.42)),
-    url("./assets/program-gentle.png") !important;
-  background-size: cover !important;
-  background-position: center !important;
-}
-
-.program-art.bomb-art {
-  background:
-    linear-gradient(rgba(3, 29, 22, 0.08), rgba(3, 29, 22, 0.42)),
-    url("./assets/program-bomb.png") !important;
-  background-size: cover !important;
-  background-position: center !important;
-}
-
-.program-art.weekend-art {
-  background:
-    linear-gradient(rgba(3, 29, 22, 0.08), rgba(3, 29, 22, 0.42)),
-    url("./assets/program-weekend.png") !important;
-  background-size: cover !important;
-  background-position: center !important;
-}
-
-/* 기존 추상 그래픽 숨기기 */
-.program-art::before,
-.program-art::after {
-  display: none !important;
-}
-
-/* 이미지 위 텍스트 가독성 */
-.art-text span,
-.art-text strong {
-  text-shadow: 0 10px 40px rgba(0, 0, 0, 0.65);
-}
-/* === 30초 소개 영상 === */
-
-.video-card {
-  width: 100%;
-  margin-top: 28px;
-  border-radius: 28px;
-  overflow: hidden;
-  background: #071f18;
-  border: 1px solid rgba(244, 239, 227, 0.14);
-  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.22);
-}
-
-.video-card video {
-  width: 100%;
-  display: block;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  background: #000;
-}
-
-/* 모바일에서는 영상이 너무 작아 보이지 않게 */
-@media (max-width: 640px) {
-  .video-card {
-    margin-top: 22px;
-    border-radius: 22px;
-  }
-
-  .video-card video {
-    aspect-ratio: 9 / 16;
   }
 }
