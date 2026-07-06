@@ -51,17 +51,14 @@
 
   <main>
     <section class="section overview" id="overview">
-  <div class="section-title reveal">
-    <p class="label">QUICK OVERVIEW</p>
-    <h2>일단 핵심부터.</h2>
-  </div>
+      <div class="section-title reveal">
+        <p class="label">QUICK OVERVIEW</p>
+        <h2>일단 핵심부터.</h2>
 
-  <div class="video-card reveal">
-    <video controls playsinline preload="metadata">
-      <source src="assets/nolto-intro.mp4" type="video/mp4" />
-      브라우저가 영상을 지원하지 않습니다.
-    </video>
-  </div>
+        <button class="video-link" id="openVideo" type="button">
+          놀토짐 30초 소개 영상 보기
+        </button>
+      </div>
 
       <div class="feature-carousel reveal">
         <div class="feature-scroll" id="featureScroll" aria-label="놀토짐 핵심 소개 가로 카드">
@@ -253,21 +250,7 @@
       </div>
 
       <div class="location-experience reveal">
-        <div class="location-visual-card">
-          <div class="map-line line-one"></div>
-          <div class="map-line line-two"></div>
-          <div class="map-line line-three"></div>
-
-          <div class="location-pin">
-            <span></span>
-          </div>
-
-          <div class="location-floating-tag tag-one">GANGNAM-GU</div>
-          <div class="location-floating-tag tag-two">B1 STUDIO</div>
-          <div class="location-floating-tag tag-three">HYBRID TRAINING</div>
-
-          <div class="location-big-type">B1</div>
-        </div>
+        <div class="location-visual-card"></div>
 
         <div class="location-info-card">
           <p class="label">NOLTO GYM ADDRESS</p>
@@ -324,14 +307,16 @@
     <strong>무료 트라이얼 신청하기</strong>
   </a>
 
-  <div class="video-modal" id="videoModal">
-    <button class="modal-close" id="closeVideo" type="button">×</button>
+  <div class="video-modal" id="videoModal" aria-hidden="true">
+    <div class="video-modal-backdrop" id="closeVideoBackdrop"></div>
+
     <div class="video-box">
-      <video controls playsinline>
+      <button class="modal-close" id="closeVideo" type="button" aria-label="영상 닫기">×</button>
+
+      <video id="introVideo" controls playsinline preload="metadata">
         <source src="assets/nolto-intro.mp4" type="video/mp4" />
         브라우저가 영상을 지원하지 않습니다.
       </video>
-      <p>영상 파일을 추가하려면 <strong>assets/nolto-intro.mp4</strong>로 업로드하면 됩니다.</p>
     </div>
   </div>
 
