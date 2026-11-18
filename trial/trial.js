@@ -11,6 +11,8 @@ const receipt = document.querySelector("#receipt");
 const formatDate = new Intl.DateTimeFormat("ko-KR", { month:"long", day:"numeric", weekday:"short", timeZone:"Asia/Seoul" });
 let slots = [];
 let sending = false;
+const requested = new URLSearchParams(location.search);
+let prefillPending = requested.has("date") && requested.has("time");
 
 function clearSelect(select, title) {
   select.replaceChildren(new Option(title, ""));
@@ -42,6 +44,18 @@ async function loadSlots() {
     clearSelect(dates, "날짜를 선택해 주세요");
     for (const day of new Set(slots.map(slot => slot.day))) dates.add(new Option(dateLabel(day), day));
     dates.disabled = !slots.length;
+    if (prefillPending) {
+      prefillPending = false;
+      const day = requested.get("date"), time = requested.get("time");
+      if (slots.some(slot => slot.day === day && slot.time === time)) {
+        dates.value = day;
+        showTimes();
+        times.value = time;
+        submit.disabled = false;
+      } else {
+        scheduleStatus.textContent = "선택한 수업의 일정이 바뀌었습니다. 다른 날짜나 시간을 선택해 주세요.";
+      }
+    }
     if (!slots.length) scheduleStatus.textContent = "현재 신청할 수 있는 일정이 없습니다.";
   } catch {
     scheduleStatus.textContent = "시간표를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.";
