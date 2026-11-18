@@ -132,3 +132,43 @@ footer { background:var(--nav); color:#dfebe5; font-size:.78rem; }
   .class-section .section-head { display:block; }
   .class-section .section-head a { margin-top:8px; }
 }
+
+
+/* A quieter, type-led overview before the class details. */
+:root { --paper:#fff; --ink:#1b1b1e; --forest:#202023; --nav:#181819; --quiet:#57575f; --rule:#dcdce1; --sage:#f4f4f6; --accent:#f1f1f3; }
+.brand img { filter:grayscale(1); }
+.top .nav-apply {color:#202023;}
+.button:hover,.trial {background:#242427;}
+.button:hover {background:#424247;}
+.text-link:hover {color:#505055;}
+.trial p {color:#dddde1;}
+.foot {color:#e5e5e8;}
+.hero {display:block;padding-block:clamp(45px,6vw,86px);}
+.hero-copy {padding:0;text-align:center;}
+.station,.hero-actions {justify-content:center;}
+.station:before {display:none;}
+.hero h1 br {display:none;}
+.hero h1 {font-size:clamp(2.2rem,4.8vw,4.4rem);margin:15px 0;}
+.highlights {background:#f5f5f7;padding-block:clamp(36px,5vw,68px);}
+.points {display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px;}
+.points a {display:flex;flex-direction:column;align-items:flex-start;padding:clamp(18px,2.5vw,36px);background:white;border-radius:18px;gap:15px;}
+.points small,.points span {color:var(--quiet);font-size:.85rem;}
+.points strong {font-size:clamp(1.45rem,2.5vw,2.3rem);letter-spacing:-.055em;line-height:1.3;}
+.points a:hover span {text-decoration:underline;}
+.stories article {display:block;border-top:1px solid var(--rule);padding-top:10px;}
+.location {display:block;background:#f5f5f7;}
+@supports (animation-timeline:view()) {
+  @media (prefers-reduced-motion:no-preference) {
+    .points a,.stories article {animation:arrive linear both;animation-timeline:view();animation-range:entry 0% entry 95%;}
+    @keyframes arrive {from {transform:translateY(18px) scale(.985);opacity:.76;} to {transform:none;opacity:1;}}
+  }
+}
+@media(max-width:760px){
+ .points {display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px;}
+ .points a {flex:0 0 79%;scroll-snap-align:start;min-height:180px;}
+ .points span {margin-top:auto;}
+ .hero h1 br {display:block;}
+ .hero h1 {line-height:1.15;}
+ .stories article {padding-block:10px;}
+ .stories h3 {margin-bottom:6px;}
+}
