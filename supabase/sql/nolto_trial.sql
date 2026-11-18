@@ -88,12 +88,23 @@ begin
 end $$;
 
 -- Each wake-up receives one short-lived ticket. Only the server may redeem it.
+create table nolto_trial.dispatch_health (
+  singleton boolean primary key default true check(singleton),
+  checked_at timestamptz not null,
+  configured boolean not null
+);
+alter table nolto_trial.dispatch_health enable row level security;
+revoke all on nolto_trial.dispatch_health from public,anon,authenticated;
+grant select,insert,update on nolto_trial.dispatch_health to service_role;
+
 create function public.nolto_trial_claim(p_ticket uuid,p_configured boolean)
 returns table(id uuid,recipient text,name text,phone text,day text,"time" text,attempts int)
 language plpgsql security invoker set search_path = '' as $$
 begin
   delete from nolto_trial.dispatch_tickets t where t.ticket=p_ticket and t.issued_at>now()-interval '2 minutes';
   if not found then return; end if;
+  insert into nolto_trial.dispatch_health(singleton,checked_at,configured) values(true,now(),p_configured)
+    on conflict(singleton) do update set checked_at=excluded.checked_at,configured=excluded.configured;
   if not p_configured then
     update nolto_trial.notifications j set next_attempt=now()+interval '5 minutes', reason='configuration'
     where j.status='pending' and j.next_attempt<=now();
