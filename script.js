@@ -58,6 +58,30 @@ let entries = [];
 let start = 0;
 let selected = "";
 
+const filter = document.querySelector("#schedule-filter");
+for (const [name, [focus]] of Object.entries(programs)) {
+  filter.add(new Option(name + " · " + focus, name));
+}
+function visibleEntries() {
+  return entries.filter(item => !filter.value || item.label?.trim().toUpperCase() === filter.value);
+}
+function selectProgram() {
+  const first = visibleEntries()[0];
+  if (first) {
+    const diff = (Date.parse(first.day + "T00:00:00Z") - firstDay) / dayInMs;
+    start = Math.min(21, Math.max(0, Math.floor(diff / 7) * 7));
+  }
+  if (entries.length) renderWeek();
+}
+filter.addEventListener("change", selectProgram);
+for (const btn of document.querySelectorAll("[data-pick]")) {
+  btn.addEventListener("click", () => {
+    filter.value = btn.dataset.pick;
+    selectProgram();
+    filter.focus({preventScroll:true});
+    document.querySelector("#schedule-board").scrollIntoView({block:"start"});
+  });
+}
 function message(text) {
   const p = document.createElement("p");
   p.textContent = text;
@@ -67,11 +91,12 @@ function showSessions() {
   for (const btn of days.querySelectorAll("button")) {
     btn.setAttribute("aria-pressed", String(btn.dataset.day === selected));
   }
-  const items = entries.filter(item => item.day === selected);
+  const items = visibleEntries().filter(item => item.day === selected);
   if (!items.length) { message("이 날짜에는 온라인으로 신청할 수 있는 수업이 없습니다."); return; }
   const links = items.map(item => {
     const link = document.createElement("a");
     link.className = "slot";
+    link.dataset.family = (item.label || "").split(" ")[0].toLowerCase();
     const params = new URLSearchParams({ date:item.day, time:item.time });
     link.href = "./trial/?" + params;
     const time = document.createElement("time");
@@ -95,7 +120,7 @@ function renderWeek() {
   previous.disabled = start === 0;
   next.disabled = start === 21;
   range.textContent = shortDate.format(dayAt(start)) + " – " + shortDate.format(dayAt(last));
-  selected = entries.find(item => item.day >= keyAt(start) && item.day <= keyAt(last))?.day || keyAt(start);
+  selected = visibleEntries().find(item => item.day >= keyAt(start) && item.day <= keyAt(last))?.day || keyAt(start);
   const buttons = Array.from({length:7}, (_, i) => {
     const offset = start + i;
     const date = dayAt(offset);
@@ -103,6 +128,7 @@ function renderWeek() {
     const btn = document.createElement("button");
     btn.type = "button";
     btn.dataset.day = day;
+    btn.classList.toggle("has-session", visibleEntries().some(item => item.day === day));
     btn.setAttribute("aria-label",shortDate.format(date) + " " + weekDay.format(date) + "요일");
     const weekday = document.createElement("small");
     weekday.textContent = weekDay.format(date);
@@ -126,7 +152,8 @@ async function load() {
     if (!Array.isArray(payload.slots)) throw Error();
     entries = payload.slots;
     updateSuggestion();
-    renderWeek();
+    if (filter.value && entries.length) selectProgram();
+    else renderWeek();
   } catch {
     days.replaceChildren();
     message("시간표를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.");
