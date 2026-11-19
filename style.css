@@ -180,3 +180,19 @@ footer { background:var(--nav); color:#dfebe5; font-size:.78rem; }
 .narrative .text-link {margin-top:14px;}
 .cycle-steps {margin-top:26px;}
 .cycle-steps small {color:var(--quiet);font-weight:700;}
+
+.lesson-photo {max-width:420px;margin-top:20px;}
+.lesson-photo img,.weight-example img {border-radius:12px;}
+.weight-example {max-width:510px;margin-top:22px;}
+.weight-example figcaption {color:var(--quiet);font-size:.82rem;margin-top:8px;}
+.finder {border-top:1px solid var(--rule);padding:20px 0 26px;}
+.finder-fields {display:flex;flex-wrap:wrap;gap:12px;margin:14px 0;}
+.finder label {display:grid;gap:4px;font-size:.9rem;font-weight:650;}
+.finder select {max-width:100%;padding:10px;border:1px solid var(--rule);border-radius:8px;background:white;color:inherit;font:inherit;}
+.finder summary {cursor:pointer;text-decoration:underline;text-underline-offset:4px;}
+.finder dt {font-weight:700;margin-top:12px;}
+.finder dd {margin:3px 0;color:var(--quiet);}
+#suggestion:not(:empty) {padding:14px 18px;margin-bottom:16px;border-left:3px solid var(--ink);background:var(--sage);}
+#suggestion p {margin:4px 0;}
+#suggestion a {margin-top:8px;}
+@media(max-width:760px){.cycle-steps article {display:block;}.finder-fields label {flex:1 1 200px;}}
